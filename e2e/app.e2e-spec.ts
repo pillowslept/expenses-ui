@@ -1,10 +1,10 @@
-import { AngularCrudRestPage } from './app.po';
+import { ExpensesUIPage } from './app.po';
 
 describe('expenses-ui App', () => {
-  let page: AngularCrudRestPage;
+  let page: ExpensesUIPage;
 
   beforeEach(() => {
-    page = new AngularCrudRestPage();
+    page = new ExpensesUIPage();
   });
 
   it('should display message saying app works', () => {
