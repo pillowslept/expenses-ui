@@ -1,0 +1,43 @@
+<h4 class="left">Movimientos</h4>
+<br>
+<p style="text-align: right;">
+  Mostrando {{ movements.length }} movimientos
+</p>
+
+<table>
+  <thead>
+  <tr>
+    <th data-field="name">Identificador</th>
+    <th data-field="name">Fecha</th>
+    <th data-field="name">Tipo</th>
+    <th data-field="name">Valor</th>
+    <th data-field="name">Observaciones</th>
+    <th data-field="name">Acciones</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let movement of movements">
+      <td>{{ movement.id }}</td>
+      <td>{{ movement.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
+      <td>{{ movement.lastUpdate }}</td>
+      <td>{{ movement.value | currency}}</td>
+      <td>{{ movement.observations }}</td>
+      <td>
+        <a *ngIf="false" title="Procesar" [routerLink]="['/movements', movement.id]">
+          <i class="material-icons">check</i>
+        </a>
+        <a *ngIf="false" title="Ver resultado" [routerLink]="['/movements', movement.id]">
+          <i class="material-icons">check</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large waves-effect waves-light green"
+     routerLink="/movements/new">
+    <i class="material-icons">add</i>
+  </a>
+</div>
