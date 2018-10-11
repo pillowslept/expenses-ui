@@ -7,7 +7,7 @@
 <table>
   <thead>
   <tr>
-    <th data-field="name">Identificador</th>
+    <th data-field="name">Id</th>
     <th data-field="name">Fecha</th>
     <th data-field="name">Tipo</th>
     <th data-field="name">Valor</th>
@@ -20,7 +20,7 @@
     <tr *ngFor="let movement of movements">
       <td>{{ movement.id }}</td>
       <td>{{ movement.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
-      <td>{{ movement.lastUpdate }}</td>
+      <td>Egreso</td>
       <td>{{ movement.value | currency}}</td>
       <td>{{ movement.observations }}</td>
       <td>
