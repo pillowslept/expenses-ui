@@ -1,18 +1,17 @@
-<h4 class="left">Movimientos</h4>
-<br>
-<p style="text-align: right;">
-  Mostrando {{ movements.length }} movimientos
+<h4 class="left">Movimientos </h4>
+<p id="totalMovements" class="right">
+  Mostrando <strong>{{ movements.length }}</strong> movimientos
 </p>
 
 <table>
   <thead>
   <tr>
-    <th data-field="name">Id</th>
-    <th data-field="name">Fecha</th>
-    <th data-field="name">Tipo</th>
-    <th data-field="name">Valor</th>
-    <th data-field="name">Observaciones</th>
-    <th data-field="name">Acciones</th>
+    <th>Id</th>
+    <th>Fecha</th>
+    <th>Tipo</th>
+    <th>Valor</th>
+    <th>Observaciones</th>
+    <th width="10%">Acciones</th>
   </tr>
   </thead>
 
@@ -21,9 +20,18 @@
       <td>{{ movement.id }}</td>
       <td>{{ movement.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
       <td>{{ movement.categoryDescription }}</td>
-      <td>{{ movement.value | currency }}</td>
+      <td>{{ movement.value | currency:'USD':true:'1.0' }}</td>
       <td>{{ movement.observations }}</td>
       <td>
+        <a title="Generar PDF" >
+          <i class="material-icons">picture_as_pdf</i>
+        </a>
+        <a title="Ver detalle" >
+          <i class="material-icons">description</i>
+        </a>
+        <a title="Editar" >
+          <i class="material-icons">edit</i>
+        </a>
         <a *ngIf="false" title="Procesar" [routerLink]="['/movements', movement.id]">
           <i class="material-icons">check</i>
         </a>
@@ -35,7 +43,7 @@
   </tbody>
 </table>
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light green"
      routerLink="/movements/new">
     <i class="material-icons">add</i>
