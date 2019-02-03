@@ -1,51 +1,50 @@
 <h4 class="left">Movimientos </h4>
 <p id="totalMovements" class="right">
-  Mostrando <strong>{{ movements.length }}</strong> movimientos
+    Mostrando <strong>{{ movements.length }}</strong> movimientos
 </p>
 
 <table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Fecha</th>
-    <th>Tipo</th>
-    <th>Valor</th>
-    <th>Observaciones</th>
-    <th width="10%">Acciones</th>
-  </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Observaciones</th>
+            <th width="10%">Acciones</th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let movement of movements">
-      <td>{{ movement.id }}</td>
-      <td>{{ movement.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
-      <td>{{ movement.categoryDescription }}</td>
-      <td>{{ movement.value | currency:'USD':true:'1.0' }}</td>
-      <td>{{ movement.observations }}</td>
-      <td>
-        <a title="Generar PDF" >
-          <i class="material-icons">picture_as_pdf</i>
-        </a>
-        <a title="Ver detalle" >
-          <i class="material-icons">description</i>
-        </a>
-        <a title="Editar" >
-          <i class="material-icons">edit</i>
-        </a>
-        <a *ngIf="false" title="Procesar" [routerLink]="['/movements', movement.id]">
-          <i class="material-icons">check</i>
-        </a>
-        <a *ngIf="false" title="Ver resultado" [routerLink]="['/movements', movement.id]">
-          <i class="material-icons">check</i>
-        </a>
-      </td>
-    </tr>
-  </tbody>
+    <tbody>
+        <tr *ngFor="let movement of movements">
+            <td>{{ movement.id }}</td>
+            <td>{{ movement.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
+            <td>{{ movement.categoryDescription }}</td>
+            <td>{{ movement.value | currency:'USD':true:'1.0' }}</td>
+            <td>{{ movement.observations }}</td>
+            <td>
+                <a materialize="tooltip" data-tooltip="Generar PDF" class="pointer tooltipped">
+                    <i class="material-icons">picture_as_pdf</i>
+                </a>
+                <a materialize="tooltip" data-tooltip="Ver detalle" class="pointer tooltipped">
+                    <i class="material-icons">description</i>
+                </a>
+                <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a materialize="tooltip" data-tooltip="Procesar" class="pointer tooltipped" *ngIf="false" [routerLink]="['/movements', movement.id]">
+                    <i class="material-icons">check</i>
+                </a>
+                <a materialize="tooltip" data-tooltip="Ver resultado" class="pointer tooltipped" *ngIf="false" [routerLink]="['/movements', movement.id]">
+                    <i class="material-icons">check</i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large waves-effect waves-light green"
-     routerLink="/movements/new">
-    <i class="material-icons">add</i>
-  </a>
+    <a class="btn-floating btn-large waves-effect waves-light green" routerLink="/movements/new">
+        <i class="material-icons">add</i>
+    </a>
 </div>

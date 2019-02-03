@@ -16,24 +16,24 @@ import { movementsRouting } from "./movements/movements.routing";
 import { MovementsModule } from "./movements/movements.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    HomeComponent,
-    NotFoundComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    MaterializeModule,
-    UsersModule,
-    usersRouting,
-    MovementsModule,
-    movementsRouting,
-    routing
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavBarComponent,
+        HomeComponent,
+        NotFoundComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        MaterializeModule,
+        UsersModule,
+        usersRouting,
+        MovementsModule,
+        movementsRouting,
+        routing
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
