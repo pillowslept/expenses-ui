@@ -10,10 +10,10 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { routing } from './app.routing';
-import { usersRouting } from "./users/users.routing";
-import { UsersModule } from "./users/users.module";
-import { movementsRouting } from "./movements/movements.routing";
-import { MovementsModule } from "./movements/movements.module";
+import { usersRouting } from './users/users.routing';
+import { UsersModule } from './users/users.module';
+import { movementsRouting } from './movements/movements.routing';
+import { MovementsModule } from './movements/movements.module';
 
 @NgModule({
     declarations: [
