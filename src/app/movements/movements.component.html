@@ -29,7 +29,7 @@
                 <a materialize="tooltip" data-tooltip="Ver detalle" class="pointer tooltipped">
                     <i class="material-icons">description</i>
                 </a>
-                <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped">
+                <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped" [routerLink]="['/movements/edit', movement.id]">
                     <i class="material-icons">edit</i>
                 </a>
                 <a materialize="tooltip" data-tooltip="Procesar" class="pointer tooltipped" *ngIf="false" [routerLink]="['/movements', movement.id]">
@@ -44,7 +44,7 @@
 </table>
 
 <div class="fixed-action-btn">
-    <a class="btn-floating btn-large waves-effect waves-light green" routerLink="/movements/new">
+    <a class="btn-floating btn-large waves-effect waves-light green" routerLink="/movements/create">
         <i class="material-icons">add</i>
     </a>
 </div>

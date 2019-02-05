@@ -9,12 +9,12 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class MovementsService {
 
-  private url: string = "http://localhost:9000/Expenses/api/movement/all";
+  private url: string = "http://localhost:9000/Expenses/api/movement/";
 
   constructor(private http: Http) { }
 
   getMovements(){
-    return this.http.get(this.url)
+    return this.http.get(`${this.url}/all`)
       .map(res => res.json());
   }
 

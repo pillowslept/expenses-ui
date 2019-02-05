@@ -1,0 +1,45 @@
+
+<h5>{{ title }}</h5>
+<div class="row">
+    <div class="row">
+        <div class="input-field col s3">
+            <select materialize="material_select" [(ngModel)]="movement.categoryId">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Category</label>
+        </div>
+        <div class="input-field col s3">
+            <select materialize="material_select" [(ngModel)]="movement.typeId">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <label>Type</label>
+        </div>
+        <div class="input-field col s3">
+            <i class="material-icons prefix">money</i>
+            <input id="value" type="text" class="validate" [(ngModel)]="movement.value">
+            <label for="value" [class.active]="movement.value">Value</label>
+        </div>
+        <div class="input-field col s3">
+            <i class="material-icons prefix">money</i>
+            <input id="creationDate" type="text" class="validate" [(ngModel)]="movement.creationDate">
+            <label for="creationDate" [class.active]="movement.creationDate">Date</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">money</i>
+            <input id="observations" type="text" class="validate" [(ngModel)]="movement.observations">
+            <label for="observations" [class.active]="movement.observations">Observations</label>
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="button" (click)="save()">
+        Submit
+        <i class="material-icons right">send</i>
+    </button>
+</div>
