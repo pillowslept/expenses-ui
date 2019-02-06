@@ -14,13 +14,15 @@ import { usersRouting } from './users/users.routing';
 import { UsersModule } from './users/users.module';
 import { movementsRouting } from './movements/movements.routing';
 import { MovementsModule } from './movements/movements.module';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
         HomeComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        CategoriesComponent
     ],
     imports: [
         BrowserModule,

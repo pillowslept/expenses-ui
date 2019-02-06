@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { MaterializeModule } from 'angular2-materialize';
 
 import { MovementsComponent } from './movements.component';
 import { MovementsService } from './shared/movements.service';
 import { MovementsFormComponent } from './movements-form/movements-form.component';
-import { MaterializeModule } from 'angular2-materialize';
+import { CategoriesService } from '.././services/categories.service';
+import { TypesService } from '.././services/types.service';
 
 @NgModule({
     imports: [
@@ -26,7 +28,9 @@ import { MaterializeModule } from 'angular2-materialize';
         MovementsComponent
     ],
     providers: [
-        MovementsService
+        MovementsService,
+        CategoriesService,
+        TypesService
     ]
 })
 export class MovementsModule { }

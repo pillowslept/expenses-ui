@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { MovementsService } from '.././shared/movements.service';
+import { CategoriesService } from '../../services/categories.service';
+import { TypesService } from '../../services/types.service';
 
 @Component({
     selector: 'app-movements-form',
@@ -12,11 +14,15 @@ export class MovementsFormComponent implements OnInit {
 
     title: string;
     movement: any = {};
+    public categories = [];
+    public types = [];
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private movementsService: MovementsService
+        private movementsService: MovementsService,
+        private categoriesService: CategoriesService,
+        private typesService: TypesService
     ) {
     }
 
@@ -39,6 +45,20 @@ export class MovementsFormComponent implements OnInit {
                         }
                     });
         });
+        this.getCategories();
+        this.getTypes();
+    }
+
+    private getTypes() {
+        this.typesService.get().subscribe(
+            types => this.types = types
+        );
+    }
+
+    private getCategories() {
+        this.categoriesService.get().subscribe(
+            categories => this.categories = categories
+        );
     }
 
     save() {

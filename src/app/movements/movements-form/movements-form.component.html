@@ -5,18 +5,14 @@
         <div class="input-field col s3">
             <select materialize="material_select" [(ngModel)]="movement.categoryId">
                 <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option [ngValue]="category.id" *ngFor="let category of categories">{{ category.description }}</option>
             </select>
             <label>Category</label>
         </div>
         <div class="input-field col s3">
             <select materialize="material_select" [(ngModel)]="movement.typeId">
                 <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option [ngValue]="type.id" *ngFor="let type of types">{{ type.description }}</option>
             </select>
             <label>Type</label>
         </div>
