@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovementsService } from './shared/movements.service';
+import { FiltersService } from '../services/filters.service';
 import { Movement } from './shared/movement';
 
 @Component({
@@ -9,15 +10,23 @@ import { Movement } from './shared/movement';
 })
 export class MovementsComponent implements OnInit {
 
-    private movements: Movement[] = [];
+    public movements: Movement[] = [];
+    public months = [];
+    public monthsFilter = 1;
+    public pageNumber = 0;
+    public pageSize = 10;
 
     constructor(
-        private movementsService: MovementsService
+        private movementsService: MovementsService,
+        private filtersService: FiltersService
     ) { }
 
     ngOnInit() {
-        this.movementsService.getMovements()
+        this.movementsService.get(this.pageNumber, this.pageSize)
             .subscribe(data => this.movements = data);
+
+        this.filtersService.get()
+            .subscribe(data => this.months = data);
     }
 
 }

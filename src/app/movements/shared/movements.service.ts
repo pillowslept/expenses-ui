@@ -1,44 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class MovementsService {
 
-  private url: string = "http://localhost:9000/Expenses/api/movement/";
+    private url = 'http://localhost:9000/Expenses/api/movements';
 
-  constructor(private http: Http) { }
+    constructor(private http: Http) { }
 
-  getMovements(){
-    return this.http.get(`${this.url}/all`)
-      .map(res => res.json());
-  }
+    getAll() {
+        return this.http.get(`${this.url}/all`)
+            .map(res => res.json());
+    }
 
-  getMovement(id){
-    return this.http.get(this.getMovementUrl(id))
-      .map(res => res.json());
-  }
+    get(pageNumber: number, pageSize: number) {
+        return this.http.get(`${this.url}/all/${pageNumber}/${pageSize}`)
+            .map(res => res.json());
+    }
 
-  addMovement(movenent){
-    return this.http.post(this.url, JSON.stringify(movenent))
-      .map(res => res.json());
-  }
+    getById(id) {
+        return this.http.get(this.buildUrl(id))
+            .map(res => res.json());
+    }
 
-  updateMovement(movenent){
-    return this.http.put(this.getMovementUrl(movenent.id), JSON.stringify(movenent))
-      .map(res => res.json());
-  }
+    add(movenent) {
+        return this.http.post(this.url, JSON.stringify(movenent))
+            .map(res => res.json());
+    }
 
-  deleteMovement(id){
-    return this.http.delete(this.getMovementUrl(id))
-      .map(res => res.json());
-  }
+    update(movenent) {
+        return this.http.put(this.buildUrl(movenent.id), JSON.stringify(movenent))
+            .map(res => res.json());
+    }
 
-  private getMovementUrl(id){
-    return this.url + "/" + id;
-  }
+    delete(id) {
+        return this.http.delete(this.buildUrl(id))
+            .map(res => res.json());
+    }
+
+    private buildUrl(id) {
+        return `${this.url}/${id}`;
+    }
 }

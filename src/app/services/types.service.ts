@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class TypesService {
 
-    private readonly URL = 'http://localhost:9000/Expenses/api/type';
+    private readonly URL = 'http://localhost:9000/Expenses/api/types';
 
     constructor(private http: Http) { }
 
     get() {
-        return this.http.get(`${this.URL}/find`)
+        return this.http.get(this.URL)
             .map(res => res.json());
     }
 

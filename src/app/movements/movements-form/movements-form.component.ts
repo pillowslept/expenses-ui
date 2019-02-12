@@ -30,13 +30,13 @@ export class MovementsFormComponent implements OnInit {
         var id = this.route.params.subscribe(params => {
             var id = params['id'];
 
-            this.title = id ? 'Edit' : 'Create';
+            this.title = id ? 'Update' : 'Create';
 
             if (!id) {
                 return;
             }
 
-            this.movementsService.getMovement(id)
+            this.movementsService.getById(id)
                 .subscribe(
                     user => this.movement = user,
                     response => {
@@ -64,12 +64,16 @@ export class MovementsFormComponent implements OnInit {
     save() {
         let result;
         if (this.movement.id) {
-            result = this.movementsService.updateMovement(this.movement);
+            result = this.movementsService.update(this.movement);
         } else {
-            result = this.movementsService.addMovement(this.movement);
+            result = this.movementsService.add(this.movement);
         }
 
-        result.subscribe(data => this.router.navigate(['movements']));
+        result.subscribe(data => this.goBack());
+    }
+
+    goBack() {
+        this.router.navigate(['movements']);
     }
 
 }

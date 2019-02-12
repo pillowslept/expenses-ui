@@ -35,7 +35,11 @@
         </div>
     </div>
     <button class="btn waves-effect waves-light" type="button" (click)="save()">
-        Submit
+        {{ title }}
         <i class="material-icons right">send</i>
+    </button>
+    <button class="btn waves-effect waves-light" type="button" (click)="goBack()">
+        Go back
+        <i class="material-icons right">arrow_back</i>
     </button>
 </div>

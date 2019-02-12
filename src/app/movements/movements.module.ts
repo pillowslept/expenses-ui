@@ -10,6 +10,7 @@ import { MovementsService } from './shared/movements.service';
 import { MovementsFormComponent } from './movements-form/movements-form.component';
 import { CategoriesService } from '.././services/categories.service';
 import { TypesService } from '.././services/types.service';
+import { FiltersService } from '.././services/filters.service';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { TypesService } from '.././services/types.service';
     providers: [
         MovementsService,
         CategoriesService,
-        TypesService
+        TypesService,
+        FiltersService
     ]
 })
 export class MovementsModule { }
