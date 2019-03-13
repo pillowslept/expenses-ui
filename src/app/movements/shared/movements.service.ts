@@ -10,12 +10,12 @@ export class MovementsService {
     constructor(private http: Http) { }
 
     getAll() {
-        return this.http.get(`${this.url}/all`)
+        return this.http.get(`${this.url}`)
             .map(res => res.json());
     }
 
     get(pageNumber: number, pageSize: number) {
-        return this.http.get(`${this.url}/all/${pageNumber}/${pageSize}`)
+        return this.http.get(`${this.url}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
             .map(res => res.json());
     }
 
@@ -25,12 +25,12 @@ export class MovementsService {
     }
 
     add(movenent) {
-        return this.http.post(this.url, JSON.stringify(movenent))
+        return this.http.put(this.url, JSON.stringify(movenent))
             .map(res => res.json());
     }
 
     update(movenent) {
-        return this.http.put(this.buildUrl(movenent.id), JSON.stringify(movenent))
+        return this.http.post(this.buildUrl(movenent.id), JSON.stringify(movenent))
             .map(res => res.json());
     }
 
@@ -42,4 +42,5 @@ export class MovementsService {
     private buildUrl(id) {
         return `${this.url}/${id}`;
     }
+
 }

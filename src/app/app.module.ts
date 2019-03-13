@@ -14,15 +14,15 @@ import { usersRouting } from './users/users.routing';
 import { UsersModule } from './users/users.module';
 import { movementsRouting } from './movements/movements.routing';
 import { MovementsModule } from './movements/movements.module';
-import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesModule } from './categories/categories.module';
+import { categoriesRouting } from './categories/categories.routing';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBarComponent,
         HomeComponent,
-        NotFoundComponent,
-        CategoriesComponent
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
@@ -33,6 +33,8 @@ import { CategoriesComponent } from './categories/categories.component';
         usersRouting,
         MovementsModule,
         movementsRouting,
+        CategoriesModule,
+        categoriesRouting,
         routing
     ],
     providers: [],

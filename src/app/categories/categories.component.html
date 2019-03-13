@@ -1,3 +1,32 @@
-<p>
-  categories works!
-</p>
+<table class="bordered highlight">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Creación</th>
+            <th>Estado</th>
+            <th width="10%">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let category of categories">
+            <td>{{ category?.id }}</td>
+            <td>{{ category?.description }}</td>
+            <td>{{ category?.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
+            <td>{{ category?.state }}</td>
+            <td>
+                <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped"
+                    [routerLink]="['/categories/edit', category?.id]">
+                    <i class="material-icons">edit</i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light green" routerLink="/categories/create">
+        <i class="material-icons">add</i>
+    </a>
+</div>

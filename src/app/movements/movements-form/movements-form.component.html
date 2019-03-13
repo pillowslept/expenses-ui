@@ -5,14 +5,14 @@
         <div class="input-field col s3">
             <select materialize="material_select" [(ngModel)]="movement.categoryId">
                 <option value="" disabled selected>Choose your option</option>
-                <option [ngValue]="category.id" *ngFor="let category of categories">{{ category.description }}</option>
+                <option *ngFor="let category of categories" [ngValue]="category?.id">{{ category?.description }}</option>
             </select>
             <label>Category</label>
         </div>
         <div class="input-field col s3">
             <select materialize="material_select" [(ngModel)]="movement.typeId">
                 <option value="" disabled selected>Choose your option</option>
-                <option [ngValue]="type.id" *ngFor="let type of types">{{ type.description }}</option>
+                <option *ngFor="let type of types" [ngValue]="type?.id">{{ type?.description }}</option>
             </select>
             <label>Type</label>
         </div>
@@ -34,7 +34,7 @@
             <label for="observations" [class.active]="movement.observations">Observations</label>
         </div>
     </div>
-    <button class="btn waves-effect waves-light" type="button" (click)="save()">
+    <button class="btn waves-effect waves-light" type="button" (click)="validateFields()">
         {{ title }}
         <i class="material-icons right">send</i>
     </button>

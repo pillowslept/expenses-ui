@@ -27,8 +27,8 @@ export class MovementsFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        var id = this.route.params.subscribe(params => {
-            var id = params['id'];
+        this.route.params.subscribe(params => {
+            const id = params['id'];
 
             this.title = id ? 'Update' : 'Create';
 
@@ -61,7 +61,28 @@ export class MovementsFormComponent implements OnInit {
         );
     }
 
-    save() {
+    private validateFields() {
+
+        if (!this.movement.categoryId) {
+            return;
+        }
+        if (!this.movement.typeId) {
+            return;
+        }
+        if (!this.movement.value) {
+            return;
+        }
+        if (!this.movement.creationDate) {
+            return;
+        }
+        if (!this.movement.observations) {
+            return;
+        }
+
+        return this.save();
+    }
+
+    private save() {
         let result;
         if (this.movement.id) {
             result = this.movementsService.update(this.movement);
