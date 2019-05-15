@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovementsService } from './shared/movements.service';
-import { FiltersService } from '../services/filters.service';
+import { FiltersService } from 'src/app/services/filters.service';
 import { Movement } from './shared/movement';
 
 @Component({

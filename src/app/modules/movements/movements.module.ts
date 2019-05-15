@@ -6,9 +6,9 @@ import { RouterModule } from '@angular/router';
 import { MovementsComponent } from './movements.component';
 import { MovementsService } from './shared/movements.service';
 import { MovementsFormComponent } from './movements-form/movements-form.component';
-import { CategoriesService } from '.././services/categories.service';
-import { TypesService } from '.././services/types.service';
-import { FiltersService } from '.././services/filters.service';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { TypesService } from 'src/app/services/types.service';
+import { FiltersService } from 'src/app/services/filters.service';
 
 @NgModule({
     imports: [
