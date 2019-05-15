@@ -1,44 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UsersService {
 
   private url = 'http://jsonplaceholder.typicode.com/users';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getUsers(){
-    return this.http.get(this.url)
-      .map(res => res.json());
+  getUsers(): Observable<any> {
+    return this.http.get(this.url);
   }
 
-  getUser(id){
-    return this.http.get(this.getUserUrl(id))
-      .map(res => res.json());
+  getUser(id): Observable<any> {
+    return this.http.get(this.getUserUrl(id));
   }
 
-  addUser(user){
-    return this.http.post(this.url, JSON.stringify(user))
-      .map(res => res.json());
+  addUser(user): Observable<any> {
+    return this.http.post(this.url, JSON.stringify(user));
   }
 
-  updateUser(user){
-    return this.http.put(this.getUserUrl(user.id), JSON.stringify(user))
-      .map(res => res.json());
+  updateUser(user): Observable<any> {
+    return this.http.put(this.getUserUrl(user.id), JSON.stringify(user));
   }
 
-  deleteUser(id){
-    return this.http.delete(this.getUserUrl(id))
-      .map(res => res.json());
+  deleteUser(id): Observable<any> {
+    return this.http.delete(this.getUserUrl(id));
   }
 
   private getUserUrl(id){
-    return this.url + "/" + id;
+    return this.url + '/' + id;
   }
 }

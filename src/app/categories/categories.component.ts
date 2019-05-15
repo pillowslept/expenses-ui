@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from 'app/services/categories.service';
+import { CategoriesService } from '../services/categories.service';
 
 @Component({
     selector: 'app-categories',
     templateUrl: './categories.component.html',
-    styleUrls: ['./categories.component.css']
+    styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
 
@@ -15,8 +15,22 @@ export class CategoriesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.loadCategories();
+    }
+
+    private loadCategories() {
         this.categoriesService.get()
             .subscribe(data => this.categories = data);
+    }
+
+    inactivate(categoryId) {
+        this.categoriesService.inactivate(categoryId)
+            .subscribe(response => this.loadCategories());
+    }
+
+    activate(categoryId) {
+        this.categoriesService.activate(categoryId)
+            .subscribe(response => this.loadCategories());
     }
 
 }

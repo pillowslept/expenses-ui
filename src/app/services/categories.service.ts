@@ -1,37 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CategoriesService {
 
     private readonly URL = 'http://localhost:9000/Expenses/api/categories';
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: HttpClient
+    ) { }
 
-    get() {
-        return this.http.get(this.URL)
-            .map(res => res.json());
+    get(): Observable<any> {
+        return this.http.get(this.URL);
     }
 
-    byId(id) {
-        return this.http.get(this.buildUrl(id))
-            .map(res => res.json());
+    byId(id): Observable<any> {
+        return this.http.get(this.buildUrl(id));
     }
 
-    add(category) {
-        return this.http.post(this.URL, JSON.stringify(category))
-            .map(res => res.json());
+    add(category): Observable<any> {
+        return this.http.post(this.URL, JSON.stringify(category));
     }
 
-    update(category) {
-        return this.http.put(this.buildUrl(category.id), JSON.stringify(category))
-            .map(res => res.json());
+    update(category): Observable<any> {
+        return this.http.put(this.buildUrl(category.id), JSON.stringify(category));
     }
 
-    delete(id) {
-        return this.http.delete(this.buildUrl(id))
-            .map(res => res.json());
+    delete(id): Observable<any> {
+        return this.http.delete(this.buildUrl(id));
+    }
+
+    activate(categoryId): Observable<any> {
+        const params = {
+            categoryId
+        };
+        return this.http.post(`${this.URL}/activate`, JSON.stringify(params));
+    }
+
+    inactivate(categoryId): Observable<any> {
+        const params = {
+            categoryId
+        };
+        return this.http.post(`${this.URL}/inactivate`, JSON.stringify(params));
     }
 
     private buildUrl(id) {

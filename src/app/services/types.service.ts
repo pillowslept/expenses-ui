@@ -1,37 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TypesService {
 
     private readonly URL = 'http://localhost:9000/Expenses/api/types';
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    get() {
-        return this.http.get(this.URL)
-            .map(res => res.json());
+    get(): Observable<any> {
+        return this.http.get(this.URL);
     }
 
-    byId(id) {
-        return this.http.get(this.buildUrl(id))
-            .map(res => res.json());
+    byId(id): Observable<any> {
+        return this.http.get(this.buildUrl(id));
     }
 
-    add(type) {
-        return this.http.post(this.URL, JSON.stringify(type))
-            .map(res => res.json());
+    add(type): Observable<any> {
+        return this.http.post(this.URL, JSON.stringify(type));
     }
 
-    update(type) {
-        return this.http.put(this.buildUrl(type.id), JSON.stringify(type))
-            .map(res => res.json());
+    update(type): Observable<any> {
+        return this.http.put(this.buildUrl(type.id), JSON.stringify(type));
     }
 
-    delete(id) {
-        return this.http.delete(this.buildUrl(id))
-            .map(res => res.json());
+    delete(id): Observable<any> {
+        return this.http.delete(this.buildUrl(id));
     }
 
     private buildUrl(id) {

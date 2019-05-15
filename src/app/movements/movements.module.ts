@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { MaterializeModule } from 'angular2-materialize';
 
 import { MovementsComponent } from './movements.component';
 import { MovementsService } from './shared/movements.service';
@@ -18,8 +16,6 @@ import { FiltersService } from '.././services/filters.service';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        HttpModule,
-        MaterializeModule
     ],
     declarations: [
         MovementsComponent,

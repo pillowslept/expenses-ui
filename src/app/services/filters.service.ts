@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class FiltersService {
@@ -8,11 +8,10 @@ export class FiltersService {
     private readonly URL = 'http://localhost:9000/Expenses/api/filters';
     private readonly language = 'es-CO';
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    get() {
-        return this.http.get(`${this.URL}/months/${this.language}`)
-            .map(res => res.json());
+    get(): Observable<any> {
+        return this.http.get(`${this.URL}/months/${this.language}`);
     }
 
 }

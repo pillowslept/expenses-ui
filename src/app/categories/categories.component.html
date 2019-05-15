@@ -3,7 +3,6 @@
         <tr>
             <th>Id</th>
             <th>Descripción</th>
-            <th>Creación</th>
             <th>Estado</th>
             <th width="10%">Acciones</th>
         </tr>
@@ -13,12 +12,19 @@
         <tr *ngFor="let category of categories">
             <td>{{ category?.id }}</td>
             <td>{{ category?.description }}</td>
-            <td>{{ category?.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
             <td>{{ category?.state }}</td>
             <td>
                 <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped"
                     [routerLink]="['/categories/edit', category?.id]">
                     <i class="material-icons">edit</i>
+                </a>
+                <a *ngIf="category?.state === 'ACTIVE' || category?.state === 'Activo'" materialize="tooltip" data-tooltip="Inactivar" class="pointer tooltipped"
+                    (click)="inactivate(category?.id)">
+                    <i class="material-icons">visibility_off</i>
+                </a>
+                <a *ngIf="category?.state === 'INACTIVE' || category?.state === 'Inactivo'" materialize="tooltip" data-tooltip="Activar" class="pointer tooltipped"
+                    (click)="activate(category?.id)">
+                    <i class="material-icons">visibility</i>
                 </a>
             </td>
         </tr>

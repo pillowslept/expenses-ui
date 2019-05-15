@@ -6,7 +6,7 @@ import { Movement } from './shared/movement';
 @Component({
     selector: 'app-movements',
     templateUrl: './movements.component.html',
-    styleUrls: ['./movements.component.css']
+    styleUrls: ['./movements.component.scss']
 })
 export class MovementsComponent implements OnInit {
 
