@@ -2,24 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-import { CategoriesComponent } from './categories.component';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { CategoriesRoutingModule } from './categories-routing.module';
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 @NgModule({
     imports: [
         CommonModule,
-        CategoriesRoutingModule,
+        HomeRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
     ],
     declarations: [
-        CategoriesComponent
-    ],
-    providers: [
-        CategoriesService
+        HomeComponent
     ]
 })
-export class CategoriesModule { }
+export class HomeModule { }

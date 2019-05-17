@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment as ENV } from 'src/environments/environment';
 
 @Injectable()
 export class CategoriesService {
 
-    private readonly URL = 'http://localhost:9000/Expenses/api/categories';
+    private readonly URL = `${ENV.api_route}categories`;
 
     constructor(
         private http: HttpClient
@@ -48,4 +49,5 @@ export class CategoriesService {
     private buildUrl(id) {
         return `${this.URL}/${id}`;
     }
+
 }

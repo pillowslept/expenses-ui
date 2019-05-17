@@ -25,12 +25,12 @@ export class CategoriesComponent implements OnInit {
 
     inactivate(categoryId) {
         this.categoriesService.inactivate(categoryId)
-            .subscribe(response => this.loadCategories());
+            .subscribe(() => this.loadCategories());
     }
 
     activate(categoryId) {
         this.categoriesService.activate(categoryId)
-            .subscribe(response => this.loadCategories());
+            .subscribe(() => this.loadCategories());
     }
 
 }
