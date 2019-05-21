@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from 'src/app/services/categories.service';
+import { CategoriesService } from 'app/services/categories.service';
+import { ACTIVE, INACTIVE } from 'app/utils/constants/categories';
 
 @Component({
     selector: 'app-categories',
@@ -8,6 +9,8 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoriesComponent implements OnInit {
 
+    public readonly ACTIVE = ACTIVE;
+    public readonly INACTIVE = INACTIVE;
     public categories: any = [];
 
     constructor(

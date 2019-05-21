@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { MovementsService } from '.././shared/movements.service';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { TypesService } from 'src/app/services/types.service';
+import { MovementsService } from 'app/services/movements.service';
+import { CategoriesService } from 'app/services/categories.service';
+import { TypesService } from 'app/services/types.service';
 
 @Component({
     selector: 'app-movements-form',

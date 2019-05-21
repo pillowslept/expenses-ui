@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { usersRouting } from './modules/users/users.routing';
 import { UsersModule } from './modules/users/users.module';
-import { MovementsModule } from './modules/movements/movements.module';
-import { CategoriesModule } from './modules/categories/categories.module';
-import { ApplicationModule } from './shared/application/application.module';
+import { MovementsModule } from 'app/modules/movements/movements.module';
+import { CategoriesModule } from 'app/modules/categories/categories.module';
+import { ApplicationModule } from 'app/shared/application/application.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({

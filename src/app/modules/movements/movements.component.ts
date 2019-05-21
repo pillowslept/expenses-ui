@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MovementsService } from './shared/movements.service';
-import { FiltersService } from 'src/app/services/filters.service';
-import { Movement } from './shared/movement';
+import { MovementsService } from 'app/services/movements.service';
+import { FiltersService } from 'app/services/filters.service';
+import { Movement } from 'app/entities/movement';
 
 @Component({
     selector: 'app-movements',

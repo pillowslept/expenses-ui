@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../shared/user';
 import { UsersService } from '../shared/users.service';
-import { BasicValidators } from 'src/app/shared/basic-validators';
+import { BasicValidators } from 'app/shared/basic-validators';
 
 @Component({
   selector: 'app-user-form',

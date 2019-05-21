@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment as ENV } from 'environments/environment';
 
 @Injectable()
 export class MovementsService {
 
-    private url = 'http://localhost:9000/Expenses/api/movements';
+    private readonly URL = `${ENV.api_route}movements`;
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient
+    ) { }
 
     getAll(): Observable<any> {
-        return this.http.get(`${this.url}`);
+        return this.http.get(`${this.URL}`);
     }
 
     get(pageNumber: number, pageSize: number): Observable<any> {
-        return this.http.get(`${this.url}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        return this.http.get(`${this.URL}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 
     getById(id): Observable<any> {
@@ -22,7 +25,7 @@ export class MovementsService {
     }
 
     add(movenent): Observable<any> {
-        return this.http.put(this.url, JSON.stringify(movenent));
+        return this.http.put(this.URL, JSON.stringify(movenent));
     }
 
     update(movenent): Observable<any> {
@@ -34,7 +37,7 @@ export class MovementsService {
     }
 
     private buildUrl(id) {
-        return `${this.url}/${id}`;
+        return `${this.URL}/${id}`;
     }
 
 }
