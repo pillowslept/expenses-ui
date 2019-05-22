@@ -10,12 +10,15 @@ import { MovementsModule } from 'app/modules/movements/movements.module';
 import { CategoriesModule } from 'app/modules/categories/categories.module';
 import { ApplicationModule } from 'app/shared/application/application.module';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     imports: [
         ApplicationModule,
         AppRoutingModule,
         BrowserModule,
+        BrowserAnimationsModule ,
         FormsModule,
         HttpClientModule,
         UsersModule,
@@ -23,6 +26,7 @@ import { RouterModule } from '@angular/router';
         MovementsModule,
         CategoriesModule,
         RouterModule,
+        ToastrModule.forRoot(),
     ],
     declarations: [
         AppComponent

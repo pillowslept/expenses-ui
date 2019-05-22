@@ -9,6 +9,7 @@ import { CategoriesService } from 'app/services/categories.service';
 import { TypesService } from 'app/services/types.service';
 import { FiltersService } from 'app/services/filters.service';
 import { MovementsRoutingModule } from './movements-routing.module';
+import { NotificationService } from 'app/services/notification.service';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { MovementsRoutingModule } from './movements-routing.module';
         MovementsService,
         CategoriesService,
         TypesService,
-        FiltersService
+        FiltersService,
+        NotificationService,
     ]
 })
 export class MovementsModule { }

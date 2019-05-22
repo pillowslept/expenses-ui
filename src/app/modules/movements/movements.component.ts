@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovementsService } from 'app/services/movements.service';
 import { FiltersService } from 'app/services/filters.service';
 import { Movement } from 'app/entities/movement';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
     selector: 'app-movements',
@@ -18,15 +19,29 @@ export class MovementsComponent implements OnInit {
 
     constructor(
         private movementsService: MovementsService,
-        private filtersService: FiltersService
+        private filtersService: FiltersService,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit() {
-        this.movementsService.get(this.pageNumber, this.pageSize)
-            .subscribe(data => this.movements = data);
+        this.searchMovements();
+        this.searchFilters();
+    }
 
-        this.filtersService.get()
-            .subscribe(data => this.months = data);
+    private searchMovements() {
+        this.movementsService.get(this.pageNumber, this.pageSize).subscribe(data => {
+            this.movements = data;
+        }, err => {
+            this.notificationService.error('Error consultando el MS', 'Error');
+        });
+    }
+
+    private searchFilters() {
+        this.filtersService.get().subscribe(data => {
+            this.months = data;
+        }, err => {
+            this.notificationService.error('Error consultando el MS', 'Error');
+        });
     }
 
 }

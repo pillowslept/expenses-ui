@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    api_route: 'http://localhost:9000/Expenses/api/'
+    api_route: 'http://localhost:9000/Expenses/api/',
+    notification_timeout: 5000
 };
 
 /*
