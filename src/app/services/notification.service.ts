@@ -7,7 +7,8 @@ export class NotificationService {
 
     private readonly DEFAULT_TIMEOUT = ENV.notification_timeout || 5000;
     private readonly PARAMS = {
-        timeOut: this.DEFAULT_TIMEOUT
+        timeOut: this.DEFAULT_TIMEOUT,
+        progressBar: true
     };
 
     constructor(

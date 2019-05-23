@@ -4,7 +4,7 @@
             <option value="" disabled selected>Choose your option</option>
             <option *ngFor="let month of months" [ngValue]="month?.id">{{ month?.description | titlecase }}</option>
         </select>
-        <label>Filter by month</label>
+        <label>{{ 'MOVEMENTS.FILTER_BY' | translate }}</label>
     </div>
     <div class="col s3 push-s7">
         <p id="totalMovements" class="right">
