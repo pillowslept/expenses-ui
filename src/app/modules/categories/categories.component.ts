@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE } from 'app/utils/constants/categories';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
     selector: 'app-categories',
@@ -14,7 +15,8 @@ export class CategoriesComponent implements OnInit {
     public categories: any = [];
 
     constructor(
-        private categoriesService: CategoriesService
+        private categoriesService: CategoriesService,
+        private notificationService: NotificationService
     ) { }
 
     ngOnInit() {
@@ -22,8 +24,11 @@ export class CategoriesComponent implements OnInit {
     }
 
     private loadCategories() {
-        this.categoriesService.get()
-            .subscribe(data => this.categories = data);
+        this.categoriesService.get().subscribe(data => {
+            this.categories = data;
+        }, err => {
+            this.notificationService.error('Error consultando el MS', 'Error');
+        });
     }
 
     inactivate(categoryId) {

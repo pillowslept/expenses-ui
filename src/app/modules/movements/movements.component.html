@@ -1,14 +1,18 @@
 <div class="row">
-    <div class="input-field col s2">
-        <select materialize="material_select" [(ngModel)]="monthsFilter">
-            <option value="" disabled selected>Choose your option</option>
-            <option *ngFor="let month of months" [ngValue]="month?.id">{{ month?.description | titlecase }}</option>
-        </select>
-        <label>{{ 'MOVEMENTS.FILTER_BY' | translate }}</label>
+    <div class="col s2">
+        <mat-form-field>
+            <mat-label>{{ 'MOVEMENTS.FILTER_BY' | translate }}</mat-label>
+            <mat-select [(value)]="monthsFilter" (selectionChange)="filterByMonth()" disableRipple>
+                <mat-option value="" disabled>{{ 'GENERAL.CHOOSE_AN_OPTION' | translate }}</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month?.id">
+                    {{ month?.description | titlecase }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
     <div class="col s3 push-s7">
-        <p id="totalMovements" class="right">
-            Showing <strong>{{ movements?.length }}</strong> movements
+        <p class="right">
+            {{ 'GENERAL.SHOWING' | translate }} <strong>{{ movements?.length }}</strong> {{ 'MOVEMENTS.TITLE' | translate | lowercase }}
         </p>
     </div>
 </div>
@@ -16,12 +20,12 @@
 <table class="bordered highlight">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Fecha</th>
-            <th>Tipo</th>
-            <th>Valor</th>
-            <th>Observaciones</th>
-            <th width="10%">Acciones</th>
+            <th>{{ 'FIELDS.ID' | translate | uppercase }}</th>
+            <th>{{ 'FIELDS.DATE' | translate | uppercase }}</th>
+            <th>{{ 'FIELDS.TYPE' | translate | uppercase }}</th>
+            <th>{{ 'FIELDS.VALUE' | translate | uppercase }}</th>
+            <th>{{ 'FIELDS.OBSERVATIONS' | translate | uppercase }}</th>
+            <th width="10%">{{ 'GENERAL.ACTIONS' | translate | uppercase }}</th>
         </tr>
     </thead>
 

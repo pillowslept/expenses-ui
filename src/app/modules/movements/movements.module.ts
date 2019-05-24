@@ -9,7 +9,6 @@ import { CategoriesService } from 'app/services/categories.service';
 import { TypesService } from 'app/services/types.service';
 import { FiltersService } from 'app/services/filters.service';
 import { MovementsRoutingModule } from './movements-routing.module';
-import { NotificationService } from 'app/services/notification.service';
 import { ApplicationModule } from 'app/shared/application/application.module';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { ApplicationModule } from 'app/shared/application/application.module';
         CategoriesService,
         TypesService,
         FiltersService,
-        NotificationService,
     ]
 })
 export class MovementsModule { }

@@ -1,5 +1,29 @@
 {
+    "CATEGORIES": {
+        "TITLE": "Categories"
+    },
+    "FIELDS": {
+        "DATE": "Date",
+        "DESCRIPTION": "Description",
+        "ID": "Id",
+        "OBSERVATIONS": "Observations",
+        "STATE": "State",
+        "TYPE": "Type",
+        "VALUE": "Value"
+    },
+    "GENERAL": {
+        "ACTIONS": "Actions",
+        "CHOOSE_AN_OPTION": "Choose an option",
+        "SHOWING": "Showing"
+    },
     "MOVEMENTS": {
-        "FILTER_BY": "Filter by month"
-    }
+        "FILTER_BY": "Filter by month",
+        "TITLE": "Movements"
+    },
+    "REPORTS": {
+        "TITLE": "Reports"
+    },
+    "TYPES": {
+        "TITLE": "Types"
+    }  
 }
