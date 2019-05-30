@@ -1,16 +1,27 @@
 <div class="row">
     <div class="col s2">
         <mat-form-field>
-            <mat-label>{{ 'MOVEMENTS.FILTER_BY' | translate }}</mat-label>
-            <mat-select [(value)]="monthsFilter" (selectionChange)="filterByMonth()" disableRipple>
-                <mat-option value="" disabled>{{ 'GENERAL.CHOOSE_AN_OPTION' | translate }}</mat-option>
+            <mat-label>{{ 'FILTERS.BY_MONTH' | translate }}</mat-label>
+            <mat-select [(value)]="monthsFilter" (selectionChange)="filterMovements()">
+                <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
                 <mat-option *ngFor="let month of months" [value]="month?.id">
                     {{ month?.description | titlecase }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="col s3 push-s7">
+    <div class="col s2">
+        <mat-form-field>
+            <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
+            <mat-select [(value)]="yearFilter" (selectionChange)="filterMovements()" [disabled]="!isValidMonth">
+                <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year?.id">
+                    {{ year?.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col s3 push-s5 right-align">
         <p class="right">
             {{ 'GENERAL.SHOWING' | translate }} <strong>{{ movements?.length }}</strong> {{ 'MOVEMENTS.TITLE' | translate | lowercase }}
         </p>
@@ -34,7 +45,7 @@
             <td>{{ movement?.id }}</td>
             <td>{{ movement?.creationDate | date: 'dd/MM/yyyy h:mm a' }}</td>
             <td>{{ movement?.categoryDescription }}</td>
-            <td>{{ movement?.value | currency:'USD':true:'1.0' }}</td>
+            <td>{{ movement?.value | currency }}</td>
             <td>{{ movement?.observations }}</td>
             <td>
                 <a materialize="tooltip" data-tooltip="Generar PDF" class="pointer tooltipped">

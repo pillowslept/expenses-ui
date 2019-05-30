@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE } from 'app/utils/constants/categories';
 import { NotificationService } from 'app/services/notification.service';
+import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 
 @Component({
     selector: 'app-categories',
@@ -27,7 +28,7 @@ export class CategoriesComponent implements OnInit {
         this.categoriesService.get().subscribe(data => {
             this.categories = data;
         }, err => {
-            this.notificationService.error('Error consultando el MS', 'Error');
+            this.notificationService.error(ManageException.handle(err));
         });
     }
 

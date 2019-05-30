@@ -1,23 +1,22 @@
-<div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper container">
-            <a routerLink="" class="brand-logo">{{ title }}
-                <i class="material-icons">home</i>
-            </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <a routerLink="/movements" routerLinkActive="active">{{ 'MOVEMENTS.TITLE' | translate }}</a>
-                </li>
-                <li>
-                    <a routerLink="/categories" routerLinkActive="active">{{ 'CATEGORIES.TITLE' | translate }}</a>
-                </li>
-                <li>
-                    <a routerLink="/types" routerLinkActive="active">{{ 'TYPES.TITLE' | translate }}</a>
-                </li>
-                <li>
-                    <a routerLink="/reports" routerLinkActive="active">{{ 'REPORTS.TITLE' | translate }}</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+<mat-toolbar color="primary">
+    <button mat-button routerLink="">
+        {{ title }} <mat-icon>home</mat-icon>
+    </button>
+    <span class="menu-spacer"></span>
+    <button mat-button routerLink="/movements">
+        {{ 'MOVEMENTS.TITLE' | translate }}
+    </button>
+    <button mat-button routerLink="/categories">
+        {{ 'CATEGORIES.TITLE' | translate }}
+    </button>
+    <button mat-button routerLink="/types">
+        {{ 'TYPES.TITLE' | translate }}
+    </button>
+    <button mat-button [matMenuTriggerFor]="menu">
+        {{ 'REPORTS.TITLE' | translate }}
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/reports">{{ 'CATEGORIES.TITLE' | translate }}</button>
+    </mat-menu>
+</mat-toolbar>

@@ -11,13 +11,17 @@
         "TYPE": "Tipo",
         "VALUE": "Valor"
     },
+    "FILTERS": {
+        "BY_MONTH": "Filtrar por mes",
+        "BY_YEAR": "Filtrar por año"
+    },
     "GENERAL": {
         "ACTIONS": "Acciones",
+        "ALL": "Todos",
         "CHOOSE_AN_OPTION": "Seleccione una opción",
         "SHOWING": "Mostrando"
     },
     "MOVEMENTS": {
-        "FILTER_BY": "Filtrar por mes",
         "TITLE": "Movimientos"
     },
     "REPORTS": {

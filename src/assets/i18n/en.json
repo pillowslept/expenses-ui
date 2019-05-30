@@ -11,13 +11,17 @@
         "TYPE": "Type",
         "VALUE": "Value"
     },
+    "FILTERS": {
+        "BY_MONTH": "Filter by moth",
+        "BY_YEAR": "Filter by year"
+    },
     "GENERAL": {
         "ACTIONS": "Actions",
+        "ALL": "All",
         "CHOOSE_AN_OPTION": "Choose an option",
         "SHOWING": "Showing"
     },
     "MOVEMENTS": {
-        "FILTER_BY": "Filter by month",
         "TITLE": "Movements"
     },
     "REPORTS": {
