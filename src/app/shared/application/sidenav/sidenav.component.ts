@@ -16,4 +16,8 @@ export class SidenavComponent {
         this.sidenav.close();
     }
 
+    open() {
+        this.sidenav.open();
+    }
+
 }

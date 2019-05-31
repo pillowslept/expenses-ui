@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-nav-bar',
@@ -7,8 +7,12 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
 
-    public title = 'Expenses';
+    @Output() openMenu = new EventEmitter<any>();
 
     constructor() { }
+
+    openSidenav() {
+        this.openMenu.emit();
+    }
 
 }
