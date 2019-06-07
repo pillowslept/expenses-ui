@@ -19,7 +19,7 @@ export class NotificationService {
         this.toastrService.success(message, title, this.PARAMS);
     }
 
-    error({ message, title = '' }) {
+    error({ message = '', title = '' }) {
         this.toastrService.error(message, title, this.PARAMS);
     }
 

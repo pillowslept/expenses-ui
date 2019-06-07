@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
 import { NotFoundRoutingModule } from './not-found-routing.module';
+import { ApplicationModule } from 'app/shared/application/application.module';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { NotFoundRoutingModule } from './not-found-routing.module';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        ApplicationModule,
     ],
     declarations: [
         NotFoundComponent

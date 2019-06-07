@@ -1,7 +1,7 @@
 <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
         <mat-toolbar class="home-actions">
-            <button mat-button (click)="close('toggle button')" routerLink="">
+            <button mat-icon-button (click)="close('toggle button')" routerLink="">
                 <mat-icon>home</mat-icon>
             </button>
         </mat-toolbar>

@@ -17,37 +17,29 @@ export class CategoriesService {
     }
 
     byId(id): Observable<any> {
-        return this.http.get(this.buildUrl(id));
+        return this.http.get(`${this.URL}/${id}`);
     }
 
     add(category): Observable<any> {
-        return this.http.post(this.URL, JSON.stringify(category));
+        return this.http.post(this.URL, category);
     }
 
     update(category): Observable<any> {
-        return this.http.put(this.buildUrl(category.id), JSON.stringify(category));
-    }
-
-    delete(id): Observable<any> {
-        return this.http.delete(this.buildUrl(id));
+        return this.http.put(`${this.URL}/${category.id}`, category);
     }
 
     activate(categoryId): Observable<any> {
         const params = {
             categoryId
         };
-        return this.http.post(`${this.URL}/activate`, JSON.stringify(params));
+        return this.http.post(`${this.URL}/activate`, params);
     }
 
     inactivate(categoryId): Observable<any> {
         const params = {
             categoryId
         };
-        return this.http.post(`${this.URL}/inactivate`, JSON.stringify(params));
-    }
-
-    private buildUrl(id) {
-        return `${this.URL}/${id}`;
+        return this.http.post(`${this.URL}/inactivate`, params);
     }
 
 }

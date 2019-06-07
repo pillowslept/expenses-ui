@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MovementsService } from 'app/services/movements.service';
 import { FiltersService } from 'app/services/filters.service';
 import { Movement } from 'app/entities/movement';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-movements',
@@ -13,7 +16,12 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 export class MovementsComponent implements OnInit {
 
     private readonly ALL_OPTION = 0;
-    public movements: Movement[] = [];
+
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    public displayedColumns: string[] = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
+    public movements: MatTableDataSource<Movement>;
     public months = [];
     public monthsFilter = this.ALL_OPTION;
     public yearFilter = this.ALL_OPTION;
@@ -34,7 +42,9 @@ export class MovementsComponent implements OnInit {
 
     private searchMovements() {
         this.movementsService.get(this.pageNumber, this.pageSize).subscribe(({ data }) => {
-            this.movements = data;
+            this.movements = new MatTableDataSource(data);
+            this.movements.sort = this.sort;
+            this.movements.paginator = this.paginator;
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
@@ -76,6 +86,10 @@ export class MovementsComponent implements OnInit {
 
     get isValidYear() {
         return this.yearFilter !== this.ALL_OPTION;
+    }
+
+    applyFilter(filterValue: string) {
+        this.movements.filter = filterValue.trim().toLowerCase();
     }
 
 }

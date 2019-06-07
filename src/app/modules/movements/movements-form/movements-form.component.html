@@ -1,45 +1,42 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select [(value)]="movement.categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category?.id">
+                {{ category?.description }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [(value)]="yearFilter">
+            <mat-option *ngFor="let type of types" [value]="type?.id">
+                {{ type?.description }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="movement.value" [placeholder]="'Value'">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="movement.creationDate" [placeholder]="'Date'">
+    </mat-form-field>
+</div>
 
-<h5>{{ title }}</h5>
-<div class="row">
-    <div class="row">
-        <div class="input-field col s3">
-            <select materialize="material_select" [(ngModel)]="movement.categoryId">
-                <option value="" disabled selected>Choose your option</option>
-                <option *ngFor="let category of categories" [ngValue]="category?.id">{{ category?.description }}</option>
-            </select>
-            <label>Category</label>
-        </div>
-        <div class="input-field col s3">
-            <select materialize="material_select" [(ngModel)]="movement.typeId">
-                <option value="" disabled selected>Choose your option</option>
-                <option *ngFor="let type of types" [ngValue]="type?.id">{{ type?.description }}</option>
-            </select>
-            <label>Type</label>
-        </div>
-        <div class="input-field col s3">
-            <i class="material-icons prefix">money</i>
-            <input id="value" type="text" class="validate" [(ngModel)]="movement.value">
-            <label for="value" [class.active]="movement.value">Value</label>
-        </div>
-        <div class="input-field col s3">
-            <i class="material-icons prefix">money</i>
-            <input id="creationDate" type="text" class="validate" [(ngModel)]="movement.creationDate">
-            <label for="creationDate" [class.active]="movement.creationDate">Date</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <i class="material-icons prefix">money</i>
-            <input id="observations" type="text" class="validate" [(ngModel)]="movement.observations">
-            <label for="observations" [class.active]="movement.observations">Observations</label>
-        </div>
-    </div>
-    <button class="btn waves-effect waves-light" type="button" (click)="validateFields()">
-        {{ title }}
-        <i class="material-icons right">send</i>
-    </button>
-    <button class="btn waves-effect waves-light" type="button" (click)="goBack()">
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <mat-form-field class="observations">
+        <textarea matInput [(ngModel)]="movement.observations" [placeholder]="'Observations'"></textarea>
+        <mat-hint align="end">{{ movement?.observations?.length }} / 500</mat-hint>
+    </mat-form-field>
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="button-actions">
+    <button mat-raised-button color="default" (click)="goBack()">
         Go back
-        <i class="material-icons right">arrow_back</i>
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" (click)="validateFields()">
+        {{ title }}
+        <mat-icon>send</mat-icon>
     </button>
 </div>

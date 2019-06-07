@@ -1,38 +1,42 @@
-<table class="bordered highlight">
-    <thead>
-        <tr>
-            <th>{{ 'FIELDS.ID' | translate | uppercase }}</th>
-            <th>{{ 'FIELDS.DESCRIPTION' | translate | uppercase }}</th>
-            <th>{{ 'FIELDS.STATE' | translate | uppercase }}</th>
-            <th width="10%">{{ 'GENERAL.ACTIONS' | translate | uppercase }}</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr *ngFor="let category of categories">
-            <td>{{ category?.id }}</td>
-            <td>{{ category?.description }}</td>
-            <td>{{ category?.state }}</td>
-            <td>
-                <a materialize="tooltip" data-tooltip="Editar" class="pointer tooltipped"
-                    [routerLink]="['/categories/edit', category?.id]">
-                    <i class="material-icons">edit</i>
-                </a>
-                <a *ngIf="category?.state === 'ACTIVE' || category?.state === 'Activo'" materialize="tooltip" data-tooltip="Inactivar" class="pointer tooltipped"
-                    (click)="inactivate(category?.id)">
-                    <i class="material-icons">visibility_off</i>
-                </a>
-                <a *ngIf="category?.state === 'INACTIVE' || category?.state === 'Inactivo'" materialize="tooltip" data-tooltip="Activar" class="pointer tooltipped"
-                    (click)="activate(category?.id)">
-                    <i class="material-icons">visibility</i>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="fixed-action-btn">
-    <a class="btn-floating btn-large waves-effect waves-light green" routerLink="/categories/create">
-        <i class="material-icons">add</i>
-    </a>
+<div fxLayout="row" fxLayoutAlign="end">
+    <button mat-raised-button color="primary" routerLink="/categories/manage/create">
+        {{ 'GENERAL.CREATE' | translate }}
+    </button>
 </div>
+
+<table mat-table [dataSource]="categories" matSort>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef width="10%" mat-sort-header>{{ 'FIELDS.ID' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element"> {{ element?.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.DESCRIPTION' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element">{{ element?.description }}</td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.STATE' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element">{{ 'GENERAL.STATES.' + element?.state | translate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef width="10%">{{ 'GENERAL.ACTIONS' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="{{ 'GENERAL.EDIT' | translate }}"
+                [routerLink]="['/categories/manage/edit', element?.id]">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="element?.state === INACTIVE" mat-icon-button
+                matTooltip="{{ 'GENERAL.STATES.ACTIVE' | translate }}"
+                (click)="activate(element?.id)">
+                <mat-icon>check</mat-icon>
+            </button>
+            <button *ngIf="element?.state === ACTIVE" mat-icon-button
+                matTooltip="{{ 'GENERAL.STATES.INACTIVE' | translate }}"
+                (click)="inactivate(element?.id)">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

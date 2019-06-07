@@ -8,6 +8,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule, MatSortModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FlexModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from 'app/services/notification.service';
@@ -22,7 +29,15 @@ import { NotificationService } from 'app/services/notification.service';
         MatToolbarModule,
         MatMenuModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatCardModule,
+        FlexModule,
     ],
     declarations: [
         NavBarComponent,
@@ -35,7 +50,15 @@ import { NotificationService } from 'app/services/notification.service';
         MatSelectModule,
         MatMenuModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatTableModule,
+        MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatCardModule,
+        FlexModule,
     ],
     providers: [
         NotificationService

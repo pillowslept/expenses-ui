@@ -13,13 +13,19 @@
     },
     "FILTERS": {
         "BY_MONTH": "Filtrar por mes",
-        "BY_YEAR": "Filtrar por año"
+        "BY_YEAR": "Filtrar por año",
+        "TITLE": "Filtrar"
     },
     "GENERAL": {
         "ACTIONS": "Acciones",
         "ALL": "Todos",
         "CHOOSE_AN_OPTION": "Seleccione una opción",
-        "SHOWING": "Mostrando"
+        "CREATE": "Crear",
+        "EDIT": "Editar",
+        "STATES": {
+            "ACTIVE": "Activo",
+            "INACTIVE": "Inactivo"
+        }
     },
     "MOVEMENTS": {
         "TITLE": "Movimientos"

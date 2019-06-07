@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MovementsService } from 'app/services/movements.service';
 import { CategoriesService } from 'app/services/categories.service';
 import { TypesService } from 'app/services/types.service';
+import { NotificationService } from 'app/services/notification.service';
+import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 
 @Component({
     selector: 'app-movements-form',
@@ -22,7 +24,8 @@ export class MovementsFormComponent implements OnInit {
         private route: ActivatedRoute,
         private movementsService: MovementsService,
         private categoriesService: CategoriesService,
-        private typesService: TypesService
+        private typesService: TypesService,
+        private notificationService: NotificationService
     ) {
     }
 
@@ -50,15 +53,19 @@ export class MovementsFormComponent implements OnInit {
     }
 
     private getTypes() {
-        this.typesService.get().subscribe(
-            types => this.types = types
-        );
+        this.typesService.get().subscribe(({ data }) => {
+            this.types = data;
+        }, err => {
+            this.notificationService.error(ManageException.handle(err));
+        });
     }
 
     private getCategories() {
-        this.categoriesService.get().subscribe(
-            categories => this.categories = categories
-        );
+        this.categoriesService.get().subscribe(({ data }) => {
+            this.categories = data;
+        }, err => {
+            this.notificationService.error(ManageException.handle(err));
+        });
     }
 
     private validateFields() {

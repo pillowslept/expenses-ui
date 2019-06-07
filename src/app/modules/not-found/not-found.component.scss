@@ -1,15 +1,13 @@
-@import "~styles/colors";
+.not-found-card {
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
 
-.icon-style {
-    color: $red-color;
-    font-size: 7rem;
-}
+    .mat-card-header-text {
+        width: 100%;
+    }
 
-.title {
-    font-size: 1.7rem;
-    font-weight: 500;
-}
-
-.btn {
-    background-color: $red-color;
+    .icon {
+        font-size: 5rem;
+    }
 }

@@ -13,13 +13,19 @@
     },
     "FILTERS": {
         "BY_MONTH": "Filter by moth",
-        "BY_YEAR": "Filter by year"
+        "BY_YEAR": "Filter by year",
+        "TITLE": "Filter"
     },
     "GENERAL": {
         "ACTIONS": "Actions",
         "ALL": "All",
         "CHOOSE_AN_OPTION": "Choose an option",
-        "SHOWING": "Showing"
+        "CREATE": "Create",
+        "EDIT": "Edit",
+        "STATES": {
+            "ACTIVE": "Active",
+            "INACTIVE": "Inactive"
+        }
     },
     "MOVEMENTS": {
         "TITLE": "Movements"
