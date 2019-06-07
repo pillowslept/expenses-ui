@@ -25,7 +25,7 @@ export class MovementsService {
     }
 
     getById(id): Observable<any> {
-        return this.http.get(this.buildUrl(id));
+        return this.http.get(`${this.URL}/${id}`);
     }
 
     add(movenent): Observable<any> {
@@ -33,15 +33,7 @@ export class MovementsService {
     }
 
     update(movenent): Observable<any> {
-        return this.http.post(this.buildUrl(movenent.id), movenent);
-    }
-
-    delete(id): Observable<any> {
-        return this.http.delete(this.buildUrl(id));
-    }
-
-    private buildUrl(id) {
-        return `${this.URL}/${id}`;
+        return this.http.post(`${this.URL}/${movenent.id}`, movenent);
     }
 
 }

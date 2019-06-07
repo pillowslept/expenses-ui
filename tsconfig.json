@@ -7,8 +7,7 @@
     "declaration": false,
     "module": "es2015",
     "types": [
-      "jquery",
-      "materialize-css"
+      "jquery"
     ],
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
