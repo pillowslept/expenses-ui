@@ -22,6 +22,7 @@
         "CHOOSE_AN_OPTION": "Seleccione una opción",
         "CREATE": "Crear",
         "EDIT": "Editar",
+        "NEW": "Nuevo",
         "STATES": {
             "ACTIVE": "Activo",
             "INACTIVE": "Inactivo"

@@ -6,6 +6,7 @@ import { CategoriesService } from 'app/services/categories.service';
 import { TypesService } from 'app/services/types.service';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-movements-form',
@@ -14,8 +15,8 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 })
 export class MovementsFormComponent implements OnInit {
 
-    title: string;
-    movement: any = {};
+    public isEdit: boolean = false;
+    public movement: any = {};
     public categories = [];
     public types = [];
 
@@ -30,26 +31,27 @@ export class MovementsFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            const id = params['id'];
-
-            this.title = id ? 'Update' : 'Create';
-
-            if (!id) {
-                return;
-            }
-
-            this.movementsService.getById(id)
-                .subscribe(
-                    user => this.movement = user,
-                    response => {
-                        if (response.status === 404) {
-                            this.router.navigate(['not-found']);
-                        }
-                    });
+        this.route.params.subscribe(({ id }) => {
+            this.validateRouteParams(id);
         });
         this.getCategories();
         this.getTypes();
+    }
+
+    private validateRouteParams(id) {
+        this.isEdit = !!id;
+
+        if (!id) {
+            return;
+        }
+
+        this.movementsService.getById(id).subscribe(({ data }) => {
+            this.movement = data;
+            this.movement.hour = moment(this.movement.creationDate).format('HH:MM');
+            this.movement.date = new Date(this.movement.creationDate);
+        }, err => {
+            this.notificationService.error(ManageException.handle(err));
+        });
     }
 
     private getTypes() {
@@ -68,7 +70,7 @@ export class MovementsFormComponent implements OnInit {
         });
     }
 
-    private validateFields() {
+    validateFields() {
 
         if (!this.movement.categoryId) {
             return;
@@ -79,7 +81,10 @@ export class MovementsFormComponent implements OnInit {
         if (!this.movement.value) {
             return;
         }
-        if (!this.movement.creationDate) {
+        if (!this.movement.date) {
+            return;
+        }
+        if (!this.movement.hour) {
             return;
         }
         if (!this.movement.observations) {
@@ -91,13 +96,28 @@ export class MovementsFormComponent implements OnInit {
 
     private save() {
         let result;
+
+        this.homologateDate();
+
         if (this.movement.id) {
             result = this.movementsService.update(this.movement);
         } else {
             result = this.movementsService.add(this.movement);
         }
 
-        result.subscribe(data => this.goBack());
+        result.subscribe(({ message }) => {
+            this.notificationService.success(message);
+            this.goBack();
+        }, err => {
+            this.notificationService.error(ManageException.handle(err));
+        });
+    }
+
+    private homologateDate() {
+        const time = this.movement.hour.split(':');
+        const creationDate = moment(this.movement.date);
+        creationDate.set({ h: time[0], m: time[1]});
+        this.movement.creationDate = creationDate.format('DD-MM-YYYY HH:mm');
     }
 
     goBack() {

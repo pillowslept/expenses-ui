@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field>
         <mat-label>Category</mat-label>
         <mat-select [(value)]="movement.categoryId">
@@ -9,7 +9,7 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Type</mat-label>
-        <mat-select [(value)]="yearFilter">
+        <mat-select [(value)]="movement.typeId">
             <mat-option *ngFor="let type of types" [value]="type?.id">
                 {{ type?.description }}
             </mat-option>
@@ -17,26 +17,33 @@
     </mat-form-field>
     <mat-form-field>
         <input matInput [(ngModel)]="movement.value" [placeholder]="'Value'">
+        <mat-icon matSuffix>money</mat-icon>
     </mat-form-field>
     <mat-form-field>
-        <input matInput [(ngModel)]="movement.creationDate" [placeholder]="'Date'">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="movement.date" [placeholder]="'D/M/YYYY'">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [placeholder]="'HH:MM'" maxlength="5" [(ngModel)]="movement.hour">
+        <mat-icon matSuffix>timelapsed</mat-icon>
     </mat-form-field>
 </div>
 
-<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+<div fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field class="observations">
-        <textarea matInput [(ngModel)]="movement.observations" [placeholder]="'Observations'"></textarea>
+        <textarea maxlength="500" matInput [(ngModel)]="movement.observations" [placeholder]="'Observations'"></textarea>
         <mat-hint align="end">{{ movement?.observations?.length }} / 500</mat-hint>
     </mat-form-field>
 </div>
 
-<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="button-actions">
+<div fxLayout="row" fxLayoutAlign="space-between center" class="button-actions">
     <button mat-raised-button color="default" (click)="goBack()">
         Go back
         <mat-icon>arrow_back</mat-icon>
     </button>
     <button mat-raised-button color="primary" (click)="validateFields()">
-        {{ title }}
+        {{ 'GENERAL.' + (isEdit ? 'EDIT' : 'NEW') | translate }}
         <mat-icon>send</mat-icon>
     </button>
 </div>

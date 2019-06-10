@@ -22,10 +22,10 @@ export class MovementsComponent implements OnInit {
 
     public displayedColumns: string[] = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
     public movements: MatTableDataSource<Movement>;
-    public months = [];
-    public monthsFilter = this.ALL_OPTION;
-    public yearFilter = this.ALL_OPTION;
-    public years = [{ id: 2019, description: '2019'}];
+    public months: any = [];
+    public monthsFilter: number = this.ALL_OPTION;
+    public yearFilter: number = this.ALL_OPTION;
+    public years: any = [];
     public pageNumber = 0;
     public pageSize = 10;
 
@@ -53,6 +53,7 @@ export class MovementsComponent implements OnInit {
     private searchFilters() {
         this.filtersService.get().subscribe(({ data }) => {
             this.months = data;
+            this.years = [{ id: 2019, description: '2019'}];
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
@@ -67,7 +68,9 @@ export class MovementsComponent implements OnInit {
             if (this.isValidYear) {
                 this.movementsService.getByMonthAndYear(
                     this.monthsFilter, this.yearFilter, this.pageNumber, this.pageSize).subscribe(({ data }) => {
-                    this.movements = data;
+                    this.movements = new MatTableDataSource(data);
+                    this.movements.sort = this.sort;
+                    this.movements.paginator = this.paginator;
                 }, err => {
                     this.notificationService.error(ManageException.handle(err));
                 });
