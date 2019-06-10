@@ -23,8 +23,8 @@ export class MovementsComponent implements OnInit {
     public displayedColumns: string[] = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
     public movements: MatTableDataSource<Movement>;
     public months: any = [];
-    public monthsFilter: number = this.ALL_OPTION;
-    public yearFilter: number = this.ALL_OPTION;
+    public monthsFilter: number;
+    public yearFilter: number;
     public years: any = [];
     public pageNumber = 0;
     public pageSize = 10;
@@ -54,6 +54,8 @@ export class MovementsComponent implements OnInit {
         this.filtersService.get().subscribe(({ data }) => {
             this.months = data;
             this.years = [{ id: 2019, description: '2019'}];
+            this.monthsFilter = this.ALL_OPTION;
+            this.yearFilter = this.ALL_OPTION;
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
