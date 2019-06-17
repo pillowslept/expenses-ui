@@ -17,6 +17,8 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/reports">{{ 'CATEGORIES.TITLE' | translate }}</button>
+        <button mat-menu-item routerLink="/reports/month-year">{{ 'MOVEMENTS.TITLE' | translate }}</button>
+        <button mat-menu-item routerLink="/reports/category">{{ 'CATEGORIES.TITLE' | translate }}</button>
+        <button mat-menu-item routerLink="/reports/type">{{ 'TYPES.TITLE' | translate }}</button>
     </mat-menu>
 </mat-toolbar>

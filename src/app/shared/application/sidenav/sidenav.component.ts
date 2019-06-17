@@ -8,7 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class SidenavComponent {
 
-    @ViewChild('sidenav') sidenav: MatSidenav;
+    @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
 
     constructor() { }
 

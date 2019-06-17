@@ -14,8 +14,8 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CategoriesComponent implements OnInit {
 
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     public readonly ACTIVE = ACTIVE;
     public readonly INACTIVE = INACTIVE;

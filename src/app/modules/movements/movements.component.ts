@@ -17,8 +17,8 @@ export class MovementsComponent implements OnInit {
 
     private readonly ALL_OPTION = 0;
 
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     public displayedColumns: string[] = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
     public movements: MatTableDataSource<Movement>;
@@ -81,7 +81,7 @@ export class MovementsComponent implements OnInit {
     }
 
     private resetFilters() {
-        this.pageNumber = 1;
+        this.pageNumber = 0;
         this.pageSize = 10;
     }
 
