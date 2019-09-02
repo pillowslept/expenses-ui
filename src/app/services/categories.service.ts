@@ -16,7 +16,7 @@ export class CategoriesService {
         return this.http.get(this.URL);
     }
 
-    byId(id): Observable<any> {
+    byId(id: number): Observable<any> {
         return this.http.get(`${this.URL}/${id}`);
     }
 
@@ -28,18 +28,12 @@ export class CategoriesService {
         return this.http.put(`${this.URL}/${category.id}`, category);
     }
 
-    activate(categoryId): Observable<any> {
-        const params = {
-            categoryId
-        };
-        return this.http.post(`${this.URL}/activate`, params);
+    activate(categoryId: number): Observable<any> {
+        return this.http.put(`${this.URL}/${categoryId}/activate`, {});
     }
 
-    inactivate(categoryId): Observable<any> {
-        const params = {
-            categoryId
-        };
-        return this.http.post(`${this.URL}/inactivate`, params);
+    inactivate(categoryId: number): Observable<any> {
+        return this.http.put(`${this.URL}/${categoryId}/inactivate`, {});
     }
 
 }

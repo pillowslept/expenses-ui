@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
-import { ACTIVE, INACTIVE } from 'app/utils/constants/categories';
+import { ACTIVE, INACTIVE, CATEGORIES_COLUMNS } from 'app/utils/constants/categories';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,7 @@ export class CategoriesComponent implements OnInit {
 
     public readonly ACTIVE = ACTIVE;
     public readonly INACTIVE = INACTIVE;
-    public displayedColumns: string[] = ['id', 'description', 'state', 'actions'];
+    public displayedColumns: string[] = CATEGORIES_COLUMNS;
     public categories: MatTableDataSource<any>;
 
     constructor(
@@ -41,16 +41,18 @@ export class CategoriesComponent implements OnInit {
         });
     }
 
-    inactivate(categoryId) {
-        this.categoriesService.inactivate(categoryId).subscribe(() => {
+    inactivate(categoryId: number) {
+        this.categoriesService.inactivate(categoryId).subscribe(({ message }) => {
+            this.notificationService.success(message);
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
     }
 
-    activate(categoryId) {
-        this.categoriesService.activate(categoryId).subscribe(() => {
+    activate(categoryId: number) {
+        this.categoriesService.activate(categoryId).subscribe(({ message }) => {
+            this.notificationService.success(message);
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));

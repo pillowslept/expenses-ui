@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field>
-        <mat-label>Category</mat-label>
+        <mat-label>{{ 'CATEGORIES.TITLE' | translate }}</mat-label>
         <mat-select [(value)]="movement.categoryId">
             <mat-option *ngFor="let category of categories" [value]="category?.id">
                 {{ category?.description }}
@@ -8,7 +8,7 @@
         </mat-select>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Type</mat-label>
+        <mat-label>{{ 'TYPES.TITLE' | translate }}</mat-label>
         <mat-select [(value)]="movement.typeId">
             <mat-option *ngFor="let type of types" [value]="type?.id">
                 {{ type?.description }}
@@ -16,30 +16,31 @@
         </mat-select>
     </mat-form-field>
     <mat-form-field>
-        <input matInput [(ngModel)]="movement.value" [placeholder]="'Value'">
+        <input matInput [(ngModel)]="movement.value" [placeholder]="'FIELDS.VALUE' | translate" autocomplete="off">
         <mat-icon matSuffix>money</mat-icon>
     </mat-form-field>
     <mat-form-field>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="movement.date" [placeholder]="'D/M/YYYY'">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="movement.date" [placeholder]="'D/M/YYYY'" autocomplete="off">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-        <input matInput [placeholder]="'HH:MM'" maxlength="5" [(ngModel)]="movement.hour">
+        <input matInput [placeholder]="'HH:MM'" maxlength="5" [(ngModel)]="movement.hour" autocomplete="off">
         <mat-icon matSuffix>timelapsed</mat-icon>
     </mat-form-field>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field class="observations">
-        <textarea maxlength="500" matInput [(ngModel)]="movement.observations" [placeholder]="'Observations'"></textarea>
-        <mat-hint align="end">{{ movement?.observations?.length }} / 500</mat-hint>
+        <textarea [maxlength]="OBS_MAX" matInput [(ngModel)]="movement.observations"
+            [placeholder]="'FIELDS.OBSERVATIONS' | translate"></textarea>
+        <mat-hint align="end">{{ movement?.observations?.length || 0 }} / {{ OBS_MAX }}</mat-hint>
     </mat-form-field>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="space-between center" class="button-actions">
     <button mat-raised-button color="default" (click)="goBack()">
-        Go back
+        {{ 'GENERAL.GO_BACK' | translate }}
         <mat-icon>arrow_back</mat-icon>
     </button>
     <button mat-raised-button color="primary" (click)="validateFields()">

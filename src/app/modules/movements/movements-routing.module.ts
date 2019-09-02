@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MovementsComponent } from './movements.component';
+import { MovementsComponent } from './manage/movements.component';
 import { MovementsFormComponent } from './movements-form/movements-form.component';
 
 const routes: Routes = [

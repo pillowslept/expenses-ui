@@ -7,6 +7,9 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { ExportToCsv } from 'export-to-csv';
+import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
+import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE } from 'app/utils/constants/tables';
 
 @Component({
     selector: 'app-movements',
@@ -15,19 +18,19 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class MovementsComponent implements OnInit {
 
-    private readonly ALL_OPTION = 0;
-
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-    public displayedColumns: string[] = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
+    private readonly ALL_OPTION = 0;
+    public displayedColumns: string[] = MOVEMENTS_COLUMNS;
     public movements: MatTableDataSource<Movement>;
     public months: any = [];
     public monthsFilter: number;
     public yearFilter: number;
     public years: any = [];
-    public pageNumber = 0;
-    public pageSize = 10;
+    public pageNumber = INITIAL_PAGE;
+    public pageSize = PAGE_SIZE;
+    public readonly PAGE_SIZE_OPTIONS = PAGE_SIZE_OPTIONS;
 
     constructor(
         private movementsService: MovementsService,
@@ -97,4 +100,46 @@ export class MovementsComponent implements OnInit {
         this.movements.filter = filterValue.trim().toLowerCase();
     }
 
+    download() {
+        const data = [
+            {
+              name: 'Test 1',
+              age: 13,
+              average: 8.2,
+              approved: true,
+              description: "using 'Content here, content here' "
+            },
+            {
+              name: 'Test 2',
+              age: 11,
+              average: 8.2,
+              approved: true,
+              description: "using 'Content here, content here' "
+            },
+            {
+              name: 'Test 4',
+              age: 10,
+              average: 8.2,
+              approved: true,
+              description: "using 'Content here, content here' "
+            },
+          ];
+
+        const options = { 
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalSeparator: '.',
+            showLabels: true, 
+            showTitle: true,
+            title: 'My Awesome CSV',
+            useTextFile: false,
+            useBom: true,
+            // useKeysAsHeaders: true,
+            headers: ['Column 1', 'Column 2']
+        };
+
+        const csvExporter = new ExportToCsv(options);
+
+        csvExporter.generateCsv(data);
+    }
 }

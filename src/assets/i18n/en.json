@@ -12,7 +12,7 @@
         "VALUE": "Value"
     },
     "FILTERS": {
-        "BY_MONTH": "Filter by moth",
+        "BY_MONTH": "Filter by month",
         "BY_YEAR": "Filter by year",
         "TITLE": "Filter"
     },
@@ -22,6 +22,7 @@
         "CHOOSE_AN_OPTION": "Choose an option",
         "CREATE": "Create",
         "EDIT": "Edit",
+        "GO_BACK": "Go back",
         "NEW": "New",
         "STATES": {
             "ACTIVE": "Active",

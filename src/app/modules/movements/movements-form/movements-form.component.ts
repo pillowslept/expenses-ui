@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class MovementsFormComponent implements OnInit {
 
+    public readonly OBS_MAX = 500;
     public isEdit: boolean = false;
     public movement: any = {};
     public categories = [];
