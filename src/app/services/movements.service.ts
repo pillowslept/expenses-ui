@@ -29,11 +29,11 @@ export class MovementsService {
     }
 
     add(movenent): Observable<any> {
-        return this.http.put(this.URL, movenent);
+        return this.http.post(this.URL, movenent);
     }
 
     update(movenent): Observable<any> {
-        return this.http.post(`${this.URL}/${movenent.id}`, movenent);
+        return this.http.put(`${this.URL}/${movenent.id}`, movenent);
     }
 
 }
