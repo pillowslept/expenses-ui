@@ -1,6 +1,19 @@
 # Expenses - UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
+User interface to interact with expenses API
+Generated with [Angular CLI](https://github.com/angular/angular-cli)
+
+## Installing
+
+```
+npm install
+```
+
+## Local running
+
+```
+npm run start
+```
 
 ## Author
 
