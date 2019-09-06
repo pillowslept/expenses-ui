@@ -1,7 +1,6 @@
 # Expenses - UI
 
 User interface to interact with expenses API
-Generated with [Angular CLI](https://github.com/angular/angular-cli)
 
 ## Installing
 
