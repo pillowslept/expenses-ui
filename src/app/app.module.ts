@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { usersRouting } from './modules/users/users.routing';
@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoadingIndicatorService } from './services/loading-indicator.service';
+import { RequestInterceptor } from './shared/interceptor/request.interceptor';
 
 @NgModule({
     imports: [
@@ -40,7 +42,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     declarations: [
         AppComponent
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+        LoadingIndicatorService,
+        { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    ],
 })
 export class AppModule { }
 
