@@ -39,10 +39,10 @@ export class MovementsFormComponent implements OnInit {
         this.getTypes();
     }
 
-    private validateRouteParams(id) {
-        this.isEdit = !!id;
+    private validateRouteParams(id: any) {
+        this.isEdit = Number(id) && !!id;
 
-        if (!id) {
+        if (!this.isEdit) {
             return;
         }
 
@@ -96,7 +96,7 @@ export class MovementsFormComponent implements OnInit {
     }
 
     private save() {
-        let result;
+        let result: any;
 
         this.homologateDate();
 
@@ -118,7 +118,7 @@ export class MovementsFormComponent implements OnInit {
         const time = this.movement.hour.split(':');
         const creationDate = moment(this.movement.date);
         creationDate.set({ h: time[0], m: time[1]});
-        this.movement.creationDate = creationDate.format('DD-MM-YYYY HH:mm');
+        this.movement.date = creationDate.format('DD-MM-YYYY HH:mm');
     }
 
     goBack() {

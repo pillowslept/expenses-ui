@@ -24,7 +24,7 @@ export class MovementsService {
         return this.http.get(`${this.URL}/month/${month}/year/${year}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 
-    getById(id): Observable<any> {
+    getById(id: number): Observable<any> {
         return this.http.get(`${this.URL}/${id}`);
     }
 

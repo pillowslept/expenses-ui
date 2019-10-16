@@ -7,7 +7,6 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { ExportToCsv } from 'export-to-csv';
 import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
 import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE } from 'app/utils/constants/tables';
 
@@ -39,8 +38,19 @@ export class MovementsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.searchMovements();
         this.searchFilters();
+    }
+
+    private searchFilters() {
+        this.filtersService.get().subscribe(({ data }) => {
+            this.months = data;
+            this.years = [{ id: 2019, description: '2019'}];
+            this.monthsFilter = new Date().getMonth() + 1;
+            this.yearFilter = this.years[0].id;
+            this.filterByMonthAndYear();
+        }, err => {
+            this.notificationService.error(ManageException.handle(err));
+        });
     }
 
     private searchMovements() {
@@ -53,34 +63,24 @@ export class MovementsComponent implements OnInit {
         });
     }
 
-    private searchFilters() {
-        this.filtersService.get().subscribe(({ data }) => {
-            this.months = data;
-            this.years = [{ id: 2019, description: '2019'}];
-            this.monthsFilter = this.ALL_OPTION;
-            this.yearFilter = this.ALL_OPTION;
+    filterMovements() {
+        this.resetFilters();
+        if (this.isValidMonth && this.isValidYear) {
+            this.filterByMonthAndYear();
+        } else if (!this.isValidMonth && !this.isValidYear) {
+            this.searchMovements();
+        }
+    }
+
+    private filterByMonthAndYear() {
+        this.movementsService.getByMonthAndYear(
+            this.monthsFilter, this.yearFilter, this.pageNumber, this.pageSize).subscribe(({ data }) => {
+            this.movements = new MatTableDataSource(data);
+            this.movements.sort = this.sort;
+            this.movements.paginator = this.paginator;
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
-    }
-
-    filterMovements() {
-        this.resetFilters();
-        if (!this.isValidMonth) {
-            this.yearFilter = this.ALL_OPTION;
-            this.searchMovements();
-        } else {
-            if (this.isValidYear) {
-                this.movementsService.getByMonthAndYear(
-                    this.monthsFilter, this.yearFilter, this.pageNumber, this.pageSize).subscribe(({ data }) => {
-                    this.movements = new MatTableDataSource(data);
-                    this.movements.sort = this.sort;
-                    this.movements.paginator = this.paginator;
-                }, err => {
-                    this.notificationService.error(ManageException.handle(err));
-                });
-            }
-        }
     }
 
     private resetFilters() {
@@ -100,46 +100,4 @@ export class MovementsComponent implements OnInit {
         this.movements.filter = filterValue.trim().toLowerCase();
     }
 
-    download() {
-        const data = [
-            {
-              name: 'Test 1',
-              age: 13,
-              average: 8.2,
-              approved: true,
-              description: "using 'Content here, content here' "
-            },
-            {
-              name: 'Test 2',
-              age: 11,
-              average: 8.2,
-              approved: true,
-              description: "using 'Content here, content here' "
-            },
-            {
-              name: 'Test 4',
-              age: 10,
-              average: 8.2,
-              approved: true,
-              description: "using 'Content here, content here' "
-            },
-          ];
-
-        const options = { 
-            fieldSeparator: ',',
-            quoteStrings: '"',
-            decimalSeparator: '.',
-            showLabels: true, 
-            showTitle: true,
-            title: 'My Awesome CSV',
-            useTextFile: false,
-            useBom: true,
-            // useKeysAsHeaders: true,
-            headers: ['Column 1', 'Column 2']
-        };
-
-        const csvExporter = new ExportToCsv(options);
-
-        csvExporter.generateCsv(data);
-    }
 }

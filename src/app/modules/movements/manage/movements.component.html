@@ -1,6 +1,15 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <div class="filter-options">
         <mat-form-field class="month-filter">
+            <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
+            <mat-select [(value)]="yearFilter" (selectionChange)="filterMovements()">
+                <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year?.id">
+                    {{ year?.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
             <mat-label>{{ 'FILTERS.BY_MONTH' | translate }}</mat-label>
             <mat-select [(value)]="monthsFilter" (selectionChange)="filterMovements()">
                 <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
@@ -9,18 +18,8 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
-            <mat-select [(value)]="yearFilter" (selectionChange)="filterMovements()" [disabled]="!isValidMonth">
-                <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
-                <mat-option *ngFor="let year of years" [value]="year?.id">
-                    {{ year?.description }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
     </div>
     <button mat-raised-button color="primary" routerLink="/movements/manage/create">
-    <!-- <button mat-raised-button color="primary" (click)="download()"> -->
         {{ 'GENERAL.CREATE' | translate }}
     </button>
 </div>
