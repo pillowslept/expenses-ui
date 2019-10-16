@@ -1,38 +1,42 @@
 import { Injectable } from '@angular/core';
 import { environment as ENV } from 'environments/environment';
-import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class NotificationService {
 
     private readonly DEFAULT_TIMEOUT = ENV.notification_timeout || 5000;
-    private readonly PARAMS = {
-        timeOut: this.DEFAULT_TIMEOUT,
-        progressBar: true
+    private readonly PARAMS: any = {
+        duration: this.DEFAULT_TIMEOUT,
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
     };
 
     constructor(
-        private toastrService: ToastrService
+        private snackBar: MatSnackBar
     ) { }
 
-    success(message: string, title: string = '') {
-        this.toastrService.success(message, title, this.PARAMS);
+    private openSnack(message: string, css: string) {
+        this.snackBar.open(message, 'Close', {
+            ...this.PARAMS,
+            panelClass: css
+        });
     }
 
-    error({ message = '', title = '' }) {
-        this.toastrService.error(message, title, this.PARAMS);
+    success(message: string) {
+        this.openSnack(message, 'green-snack');
     }
 
-    warning(message: string, title: string = '') {
-        this.toastrService.warning(message, title, this.PARAMS);
+    error(message: string = '') {
+        this.openSnack(message, 'red-snack');
     }
 
-    info(message: string, title: string = '') {
-        this.toastrService.info(message, title, this.PARAMS);
+    warning(message: string) {
+        this.openSnack(message, 'yellow-snack');
     }
 
-    show(message: string, title: string = '') {
-        this.toastrService.show(message, title, this.PARAMS);
+    info(message: string) {
+        this.openSnack(message, 'info-snack');
     }
 
 }

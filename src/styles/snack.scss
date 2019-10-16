@@ -1,0 +1,21 @@
+@import "~styles/colors";
+
+.red-snack {
+    background-color: $red-color;
+}
+
+.green-snack {
+    background-color: $green-color;
+}
+
+.yellow-snack {
+    background-color: $yellow-color;
+}
+
+.info-snack {
+    background-color: $info-color;
+}
+
+.mat-simple-snackbar-action button {
+    color: white;
+}

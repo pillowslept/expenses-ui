@@ -42,8 +42,8 @@ export class CategoriesComponent implements OnInit {
     }
 
     inactivate(categoryId: number) {
-        this.categoriesService.inactivate(categoryId).subscribe(({ message }) => {
-            this.notificationService.success(message);
+        this.categoriesService.inactivate(categoryId).subscribe(({ data }) => {
+            this.notificationService.success(data);
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
@@ -51,8 +51,8 @@ export class CategoriesComponent implements OnInit {
     }
 
     activate(categoryId: number) {
-        this.categoriesService.activate(categoryId).subscribe(({ message }) => {
-            this.notificationService.success(message);
+        this.categoriesService.activate(categoryId).subscribe(({ data }) => {
+            this.notificationService.success(data);
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
