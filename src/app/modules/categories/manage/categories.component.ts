@@ -6,11 +6,13 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateEditCategoryModalComponent } from '../create-edit/create-edit-category.component';
 
 @Component({
     selector: 'app-categories',
     templateUrl: './categories.component.html',
-    styleUrls: ['./categories.component.scss']
+    styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
 
@@ -23,6 +25,7 @@ export class CategoriesComponent implements OnInit {
     public categories: MatTableDataSource<any>;
 
     constructor(
+        public matDialog: MatDialog,
         private categoriesService: CategoriesService,
         private notificationService: NotificationService
     ) { }
@@ -56,6 +59,22 @@ export class CategoriesComponent implements OnInit {
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
+        });
+    }
+
+    openDialog(action: string, category: any = {}): void {
+        const dialogRef = this.matDialog.open(CreateEditCategoryModalComponent, {
+            width: '400px',
+            data: {
+                action,
+                category: { ...category }
+            }
+        });
+
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result) {
+                this.loadCategories();
+            }
         });
     }
 

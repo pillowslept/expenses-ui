@@ -16,7 +16,8 @@ import {
     MatPaginatorModule,
     MatDatepickerModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule,
 } from '@angular/material';
 
 const modules = [
@@ -37,6 +38,7 @@ const modules = [
     MatDatepickerModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatDialogModule,
 ];
 
 @NgModule({

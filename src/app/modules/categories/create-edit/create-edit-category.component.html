@@ -1,18 +1,17 @@
-<div fxLayout="row" fxLayoutAlign="center">
-    <mat-form-field class="description">
-        <input matInput [(ngModel)]="category.description"
-            [placeholder]="'FIELDS.DESCRIPTION' | translate" autocomplete="off">
-        <mat-icon matSuffix>text_fields</mat-icon>
-    </mat-form-field>
+<h2 mat-dialog-title>{{ 'CATEGORIES.TITLE' | translate }}</h2>
+<div mat-dialog-content>
+    <div fxLayout="row" fxLayoutAlign="center">
+        <mat-form-field class="description">
+            <input matInput [(ngModel)]="category.description"
+                [placeholder]="'FIELDS.DESCRIPTION' | translate" autocomplete="off">
+            <mat-icon matSuffix>text_fields</mat-icon>
+            <mat-hint align="end">{{ 'GENERAL.MIN_CHARS' | translate }}: {{ DEFAULT_MIN_CHARS }}</mat-hint>
+        </mat-form-field>
+    </div>
 </div>
-
-<div fxLayout="row" fxLayoutAlign="space-between center" class="button-actions">
-    <button mat-raised-button color="default" (click)="goBack()">
-        {{ 'GENERAL.GO_BACK' | translate }}
-        <mat-icon>arrow_back</mat-icon>
-    </button>
+<div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">{{ 'GENERAL.CANCEL' | translate }}</button>
     <button mat-raised-button color="primary" (click)="process()" [disabled]="!isValidData">
         {{ 'GENERAL.' + (isEdit ? 'EDIT' : 'NEW') | translate }}
-        <mat-icon>send</mat-icon>
     </button>
 </div>

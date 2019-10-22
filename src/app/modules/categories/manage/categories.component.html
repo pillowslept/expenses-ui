@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button color="primary" routerLink="/categories/manage/create">
+    <button mat-raised-button color="primary" (click)="openDialog('create')">
         {{ 'GENERAL.CREATE' | translate }}
     </button>
 </div>
@@ -20,17 +20,17 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef width="10%">{{ 'GENERAL.ACTIONS' | translate | uppercase }}</th>
         <td mat-cell *matCellDef="let element">
-            <button mat-icon-button matTooltip="{{ 'GENERAL.EDIT' | translate }}"
-                [routerLink]="['/categories/manage/edit', element?.id]">
+            <button mat-icon-button [matTooltip]="'GENERAL.EDIT' | translate"
+                (click)="openDialog('edit', element)">
                 <mat-icon>edit</mat-icon>
             </button>
             <button *ngIf="element?.state === INACTIVE" mat-icon-button
-                matTooltip="{{ 'GENERAL.STATES.ACTIVE' | translate }}"
+                [matTooltip]="'GENERAL.STATES.ACTIVE' | translate"
                 (click)="activate(element?.id)">
                 <mat-icon>check</mat-icon>
             </button>
             <button *ngIf="element?.state === ACTIVE" mat-icon-button
-                matTooltip="{{ 'GENERAL.STATES.INACTIVE' | translate }}"
+                [matTooltip]="'GENERAL.STATES.INACTIVE' | translate"
                 (click)="inactivate(element?.id)">
                 <mat-icon>cancel</mat-icon>
             </button>

@@ -1,71 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { CategoriesService } from 'app/services/categories.service';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import * as selectn from 'selectn';
 
 @Component({
     selector: 'app-create-edit-category',
     templateUrl: './create-edit-category.component.html',
     styleUrls: ['./create-edit-category.component.scss']
 })
-export class CreateEditCategoryComponent implements OnInit {
+export class CreateEditCategoryModalComponent implements OnInit {
 
-    public isEdit: boolean = false;
     public category: any = {};
+    public readonly DEFAULT_MIN_CHARS: number = 5;
 
     constructor(
-        private router: Router,
-        private route: ActivatedRoute,
         private categoriesService: CategoriesService,
-        private notificationService: NotificationService
-    ) {
-    }
+        private notificationService: NotificationService,
+        public dialogRef: MatDialogRef<CreateEditCategoryModalComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any = {},
+    ) { }
 
     ngOnInit() {
-        this.route.params.subscribe(({ id }) => {
-            this.validateRouteParams(id);
-        });
-    }
-
-    private validateRouteParams(id: number) {
-        this.isEdit = !!id;
-
-        if (!id) {
-            return;
-        }
-
-        this.categoriesService.byId(id).subscribe(({ data }) => {
-            this.category = data;
-        }, err => {
-            this.notificationService.error(ManageException.handle(err));
-        });
+        this.category = this.data.category || {};
     }
 
     process() {
-        let result;
+        let result: any;
 
-        if (this.category.id) {
+        if (this.isEdit) {
             result = this.categoriesService.update(this.category);
         } else {
             result = this.categoriesService.add(this.category);
         }
 
-        result.subscribe(({ message }) => {
-            this.notificationService.success(message);
-            this.goBack();
+        result.subscribe(({ data }) => {
+            this.notificationService.success(data);
+            this.dialogRef.close(true);
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
     }
 
-    goBack() {
-        this.router.navigate(['categories']);
+    get isEdit() {
+        return this.data.action === 'edit';
     }
 
     get isValidData() {
-        return !!this.category && !!this.category.description;
+        return !!selectn('description', this.category)
+            && this.category.description.length >= this.DEFAULT_MIN_CHARS;
     }
 
 }

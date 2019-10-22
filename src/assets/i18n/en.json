@@ -19,10 +19,13 @@
     "GENERAL": {
         "ACTIONS": "Actions",
         "ALL": "All",
+        "CANCEL": "Cancel",
         "CHOOSE_AN_OPTION": "Choose an option",
+        "CONFIRM": "Confirm",
         "CREATE": "Create",
         "EDIT": "Edit",
         "GO_BACK": "Go back",
+        "MIN_CHARS": "Character minimum",
         "NEW": "New",
         "STATES": {
             "ACTIVE": "Active",
