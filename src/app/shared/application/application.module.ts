@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from 'app/services/notification.service';
 import { MaterialModule } from './material.module';
+import { ConfirmActionDialogComponent } from './modals/confirm-action/confirm-action.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { MaterialModule } from './material.module';
     declarations: [
         NavBarComponent,
         SidenavComponent,
+        ConfirmActionDialogComponent,
     ],
     exports: [
         NavBarComponent,
@@ -26,9 +28,11 @@ import { MaterialModule } from './material.module';
         TranslateModule,
         MaterialModule,
         FlexModule,
+        ConfirmActionDialogComponent,
     ],
     providers: [
-        NotificationService
-    ]
+        NotificationService,
+    ],
+    entryComponents: [ConfirmActionDialogComponent]
 })
 export class ApplicationModule { }

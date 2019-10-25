@@ -26,12 +26,12 @@
             </button>
             <button *ngIf="element?.state === INACTIVE" mat-icon-button
                 [matTooltip]="'GENERAL.STATES.ACTIVE' | translate"
-                (click)="activate(element?.id)">
+                (click)="confirmAction('activate', element?.id)">
                 <mat-icon>check</mat-icon>
             </button>
             <button *ngIf="element?.state === ACTIVE" mat-icon-button
                 [matTooltip]="'GENERAL.STATES.INACTIVE' | translate"
-                (click)="inactivate(element?.id)">
+                (click)="confirmAction('inactivate', element?.id)">
                 <mat-icon>cancel</mat-icon>
             </button>
         </td>

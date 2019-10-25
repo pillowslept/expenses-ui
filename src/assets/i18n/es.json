@@ -22,6 +22,7 @@
         "CANCEL": "Cancelar",
         "CHOOSE_AN_OPTION": "Seleccione una opción",
         "CONFIRM": "Confirmar",
+        "CONFIRM_MESSAGE": "¿Está seguro que desea realizar la acción solicitada?",
         "CREATE": "Crear",
         "EDIT": "Editar",
         "GO_BACK": "Regresar",

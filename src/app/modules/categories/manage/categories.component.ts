@@ -1,3 +1,4 @@
+import { ConfirmActionDialogComponent } from './../../../shared/application/modals/confirm-action/confirm-action.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE, CATEGORIES_COLUMNS } from 'app/utils/constants/categories';
@@ -6,8 +7,8 @@ import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateEditCategoryModalComponent } from '../create-edit/create-edit-category.component';
+import { CreateEditCategoryDialogComponent } from '../create-edit/create-edit-category.component';
+import { DialogService } from 'app/services/dialog.service';
 
 @Component({
     selector: 'app-categories',
@@ -25,9 +26,9 @@ export class CategoriesComponent implements OnInit {
     public categories: MatTableDataSource<any>;
 
     constructor(
-        public matDialog: MatDialog,
         private categoriesService: CategoriesService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private dialogService: DialogService,
     ) { }
 
     ngOnInit() {
@@ -44,7 +45,7 @@ export class CategoriesComponent implements OnInit {
         });
     }
 
-    inactivate(categoryId: number) {
+    private inactivate(categoryId: number) {
         this.categoriesService.inactivate(categoryId).subscribe(({ data }) => {
             this.notificationService.success(data);
             this.loadCategories();
@@ -53,7 +54,7 @@ export class CategoriesComponent implements OnInit {
         });
     }
 
-    activate(categoryId: number) {
+    private activate(categoryId: number) {
         this.categoriesService.activate(categoryId).subscribe(({ data }) => {
             this.notificationService.success(data);
             this.loadCategories();
@@ -63,17 +64,33 @@ export class CategoriesComponent implements OnInit {
     }
 
     openDialog(action: string, category: any = {}): void {
-        const dialogRef = this.matDialog.open(CreateEditCategoryModalComponent, {
+        const data = {
             width: '400px',
             data: {
                 action,
                 category: { ...category }
             }
-        });
+        };
 
-        dialogRef.afterClosed().subscribe((result: boolean) => {
+        const dialog = this.dialogService.open(CreateEditCategoryDialogComponent, data);
+
+        dialog.subscribe((result: boolean) => {
             if (result) {
                 this.loadCategories();
+            }
+        });
+    }
+
+    confirmAction(action: string, categoryId: number): void {
+        const dialog = this.dialogService.open(ConfirmActionDialogComponent);
+
+        dialog.subscribe((result: boolean) => {
+            if (result) {
+                if (action === 'activate') {
+                    this.activate(categoryId);
+                } else {
+                    this.inactivate(categoryId);
+                }
             }
         });
     }

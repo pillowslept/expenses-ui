@@ -11,7 +11,7 @@ import * as selectn from 'selectn';
     templateUrl: './create-edit-category.component.html',
     styleUrls: ['./create-edit-category.component.scss']
 })
-export class CreateEditCategoryModalComponent implements OnInit {
+export class CreateEditCategoryDialogComponent implements OnInit {
 
     public category: any = {};
     public readonly DEFAULT_MIN_CHARS: number = 5;
@@ -19,7 +19,7 @@ export class CreateEditCategoryModalComponent implements OnInit {
     constructor(
         private categoriesService: CategoriesService,
         private notificationService: NotificationService,
-        public dialogRef: MatDialogRef<CreateEditCategoryModalComponent>,
+        public dialogRef: MatDialogRef<CreateEditCategoryDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any = {},
     ) { }
 
