@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ 'MOVEMENTS.TITLE' | translate }}</h2>
+<div mat-dialog-content>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="30">
+            <mat-label>{{ 'TYPES.TITLE' | translate }}</mat-label>
+            <mat-select [(value)]="movement.typeId">
+                <mat-option *ngFor="let type of types" [value]="type?.id">
+                    {{ type?.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="30">
+            <mat-label>{{ 'CATEGORIES.TITLE' | translate }}</mat-label>
+            <mat-select [(value)]="movement.categoryId">
+                <mat-option *ngFor="let category of categories" [value]="category?.id">
+                    {{ category?.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="30">
+            <input matInput [(ngModel)]="movement.value" [placeholder]="'FIELDS.VALUE' | translate" autocomplete="off">
+            <mat-icon matSuffix>money</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="48">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="movement.date" [placeholder]="'D/M/YYYY'" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field fxFlex="48">
+            <input matInput [placeholder]="'HH:MM'" maxlength="5" [(ngModel)]="movement.hour" autocomplete="off">
+            <mat-icon matSuffix>timelapsed</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field fxFlex="100">
+            <textarea [maxlength]="OBS_MAX" matInput [(ngModel)]="movement.observations"
+                [placeholder]="'FIELDS.OBSERVATIONS' | translate"></textarea>
+            <mat-hint align="end">{{ movement?.observations?.length || 0 }} / {{ OBS_MAX }}</mat-hint>
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false">{{ 'GENERAL.CANCEL' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="process()" [disabled]="!isValidData">
+        {{ 'GENERAL.' + (isEdit ? 'EDIT' : 'NEW') | translate }}
+    </button>
+</div>

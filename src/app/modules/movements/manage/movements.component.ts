@@ -9,6 +9,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
 import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE } from 'app/utils/constants/tables';
+import { CreateEditMovementDialogComponent } from '../create-edit/create-edit-movement.component';
+import { DialogService } from 'app/services/dialog.service';
 
 @Component({
     selector: 'app-movements',
@@ -34,7 +36,8 @@ export class MovementsComponent implements OnInit {
     constructor(
         private movementsService: MovementsService,
         private filtersService: FiltersService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private dialogService: DialogService,
     ) { }
 
     ngOnInit() {
@@ -98,6 +101,24 @@ export class MovementsComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.movements.filter = filterValue.trim().toLowerCase();
+    }
+
+    openCreateEditDialog(action: string, movement: any = {}): void {
+        const data = {
+            width: '700px',
+            data: {
+                action,
+                movement: { ...movement }
+            }
+        };
+
+        const dialog = this.dialogService.open(CreateEditMovementDialogComponent, data);
+
+        dialog.subscribe((result: boolean) => {
+            if (result) {
+                this.searchFilters();
+            }
+        });
     }
 
 }

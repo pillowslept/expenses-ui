@@ -1,58 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
 
-import { MovementsService } from 'app/services/movements.service';
 import { CategoriesService } from 'app/services/categories.service';
-import { TypesService } from 'app/services/types.service';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import * as selectn from 'selectn';
+import { TypesService } from 'app/services/types.service';
+import { MovementsService } from 'app/services/movements.service';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'app-movements-form',
-    templateUrl: './movements-form.component.html',
-    styleUrls: ['./movements-form.component.scss']
+    selector: 'app-create-edit-movement',
+    templateUrl: './create-edit-movement.component.html',
+    styleUrls: ['./create-edit-movement.component.scss']
 })
-export class MovementsFormComponent implements OnInit {
+export class CreateEditMovementDialogComponent implements OnInit {
 
-    public readonly OBS_MAX = 500;
-    public isEdit: boolean = false;
     public movement: any = {};
-    public categories = [];
-    public types = [];
+    public readonly OBS_MAX: number = 500;
+    public categories: Array<any> = [];
+    public types: Array<any> = [];
 
     constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private movementsService: MovementsService,
         private categoriesService: CategoriesService,
         private typesService: TypesService,
-        private notificationService: NotificationService
-    ) {
-    }
+        private movementsService: MovementsService,
+        private notificationService: NotificationService,
+        public dialogRef: MatDialogRef<CreateEditMovementDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any = {},
+    ) { }
 
     ngOnInit() {
-        this.route.params.subscribe(({ id }) => {
-            this.validateRouteParams(id);
-        });
+        this.mapInitialData();
         this.getCategories();
         this.getTypes();
     }
 
-    private validateRouteParams(id: any) {
-        this.isEdit = Number(id) && !!id;
-
-        if (!this.isEdit) {
-            return;
-        }
-
-        this.movementsService.getById(id).subscribe(({ data }) => {
-            this.movement = data;
+    private mapInitialData() {
+        this.movement = this.data.movement || {};
+        if (this.movement.id) {
             this.movement.hour = moment(this.movement.creationDate).format('HH:MM');
             this.movement.date = new Date(this.movement.creationDate);
-        }, err => {
-            this.notificationService.error(ManageException.handle(err));
-        });
+        }
     }
 
     private getTypes() {
@@ -71,28 +60,10 @@ export class MovementsFormComponent implements OnInit {
         });
     }
 
-    validateFields() {
-
-        if (!this.movement.categoryId) {
-            return;
+    process() {
+        if (this.isValidData) {
+            this.save();
         }
-        if (!this.movement.typeId) {
-            return;
-        }
-        if (!this.movement.value) {
-            return;
-        }
-        if (!this.movement.date) {
-            return;
-        }
-        if (!this.movement.hour) {
-            return;
-        }
-        if (!this.movement.observations) {
-            return;
-        }
-
-        return this.save();
     }
 
     private save() {
@@ -100,7 +71,7 @@ export class MovementsFormComponent implements OnInit {
 
         this.homologateDate();
 
-        if (this.movement.id) {
+        if (this.isEdit) {
             result = this.movementsService.update(this.movement);
         } else {
             result = this.movementsService.add(this.movement);
@@ -108,7 +79,7 @@ export class MovementsFormComponent implements OnInit {
 
         result.subscribe(({ message }) => {
             this.notificationService.success(message);
-            this.goBack();
+            this.dialogRef.close(true);
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
@@ -121,8 +92,14 @@ export class MovementsFormComponent implements OnInit {
         this.movement.date = creationDate.format('DD-MM-YYYY HH:mm');
     }
 
-    goBack() {
-        this.router.navigate(['movements']);
+    get isEdit() {
+        return this.data.action === 'edit';
+    }
+
+    get isValidData() {
+        return !!selectn('categoryId', this.movement) && !!selectn('typeId', this.movement)
+            && !!selectn('value', this.movement) && !!selectn('date', this.movement)
+            && !!selectn('hour', this.movement) && !!selectn('observations', this.movement);
     }
 
 }
