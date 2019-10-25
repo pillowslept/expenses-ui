@@ -1,6 +1,6 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between center">
-    <div class="filter-options">
-        <mat-form-field class="month-filter">
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="40">
+        <mat-form-field fxFlex="48">
             <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
             <mat-select [(value)]="yearFilter" (selectionChange)="filterMovements()">
                 <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
@@ -9,7 +9,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field fxFlex="48">
             <mat-label>{{ 'FILTERS.BY_MONTH' | translate }}</mat-label>
             <mat-select [(value)]="monthsFilter" (selectionChange)="filterMovements()">
                 <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
@@ -24,10 +24,12 @@
     </button>
 </div>
 
-<mat-form-field *ngIf="movements?.data?.length">
-    <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'FILTERS.TITLE' | translate">
-    <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+<div fxLayout="row">
+    <mat-form-field *ngIf="movements?.data?.length" fxFlex="40">
+        <input matInput (keyup)="applyFilter($event.target.value)" [placeholder]="'FILTERS.TITLE' | translate">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
 
 <table mat-table [dataSource]="movements" matSort>
     <ng-container matColumnDef="id">
