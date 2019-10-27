@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from 'app/services/notification.service';
 import { MaterialModule } from './material.module';
-import { ConfirmActionDialogComponent } from './modals/confirm-action/confirm-action.component';
+import { ConfirmActionDialogComponent } from './dialogs/confirm-action/confirm-action.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { ConfirmActionDialogComponent } from './modals/confirm-action/confirm-ac
         NavBarComponent,
         SidenavComponent,
         ConfirmActionDialogComponent,
+        CustomDatePipe,
     ],
     exports: [
         NavBarComponent,
@@ -29,6 +31,7 @@ import { ConfirmActionDialogComponent } from './modals/confirm-action/confirm-ac
         MaterialModule,
         FlexModule,
         ConfirmActionDialogComponent,
+        CustomDatePipe,
     ],
     providers: [
         NotificationService,

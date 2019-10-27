@@ -3,6 +3,8 @@
         "TITLE": "Categorías"
     },
     "FIELDS": {
+        "CREATED_AT": "Creado en",
+        "UPDATED_AT": "Actualizado en",
         "DATE": "Fecha",
         "DESCRIPTION": "Descripción",
         "ID": "Id",

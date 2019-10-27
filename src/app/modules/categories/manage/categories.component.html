@@ -13,6 +13,14 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.DESCRIPTION' | translate | uppercase }}</th>
         <td mat-cell *matCellDef="let element">{{ element?.description }}</td>
     </ng-container>
+    <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.CREATED_AT' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element">{{ element?.createdAt | customDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.UPDATED_AT' | translate | uppercase }}</th>
+        <td mat-cell *matCellDef="let element">{{ element?.updatedAt | customDate }}</td>
+    </ng-container>
     <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'FIELDS.STATE' | translate | uppercase }}</th>
         <td mat-cell *matCellDef="let element">{{ 'GENERAL.STATES.' + element?.state | translate }}</td>

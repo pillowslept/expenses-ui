@@ -1,4 +1,3 @@
-import { ConfirmActionDialogComponent } from './../../../shared/application/modals/confirm-action/confirm-action.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE, CATEGORIES_COLUMNS } from 'app/utils/constants/categories';
@@ -9,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { CreateEditCategoryDialogComponent } from '../create-edit/create-edit-category.component';
 import { DialogService } from 'app/services/dialog.service';
+import { ConfirmActionDialogComponent } from 'app/shared/application/dialogs/confirm-action/confirm-action.component';
 
 @Component({
     selector: 'app-categories',

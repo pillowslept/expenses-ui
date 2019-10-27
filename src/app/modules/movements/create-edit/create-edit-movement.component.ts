@@ -8,6 +8,7 @@ import * as selectn from 'selectn';
 import { TypesService } from 'app/services/types.service';
 import { MovementsService } from 'app/services/movements.service';
 import * as moment from 'moment';
+import { DEFAULT_FORMAT } from 'app/utils/constants/dates';
 
 @Component({
     selector: 'app-create-edit-movement',
@@ -89,7 +90,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
         const time = this.movement.hour.split(':');
         const creationDate = moment(this.movement.date);
         creationDate.set({ h: time[0], m: time[1]});
-        this.movement.date = creationDate.format('DD-MM-YYYY HH:mm');
+        this.movement.date = creationDate.format(DEFAULT_FORMAT);
     }
 
     get isEdit() {
