@@ -1,14 +1,16 @@
-<mat-card class="not-found-card">
-    <h2>This is embarrassing...</h2>
-    <mat-icon mat-card-image class="icon">sentiment_very_dissatisfied</mat-icon>
-    <mat-card-content>
-        <p>
-            We couln't find the page that you're looking for
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" routerLink="">Take me to the beginning
-            <mat-icon>home</mat-icon>
-        </button>
-    </mat-card-actions>
-</mat-card>
+<div fxLayout="row" fxLayoutAlign="center">
+    <mat-card class="not-found-card" fxFlex="30" fxFlex.sm="50" fxFlex.xs="80">
+        <h2>This is embarrassing...</h2>
+        <mat-icon mat-card-image class="icon">sentiment_very_dissatisfied</mat-icon>
+        <mat-card-content>
+            <p>
+                We couln't find the page that you're looking for
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" routerLink="">Home
+                <mat-icon>home</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

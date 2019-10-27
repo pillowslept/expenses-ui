@@ -4,7 +4,7 @@ import { HttpRequest } from '@angular/common/http';
 @Injectable()
 export class LoadingIndicatorService {
 
-    public onLoadingChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public onLoadingChanged: EventEmitter<boolean> = new EventEmitter<boolean>(true);
     private requests: Array<HttpRequest<any>> = [];
 
     startRequest(req: HttpRequest<any>): void {
