@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ComponentType } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { ComponentType } from '@angular/cdk/portal';
 
 @Injectable()
 export class DialogService {
