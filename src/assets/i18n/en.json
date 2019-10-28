@@ -35,6 +35,9 @@
             "INACTIVE": "Inactive"
         }
     },
+    "MESSAGES": {
+        "ACTION_SUCCESS": "Action executed correctly"
+    },
     "MOVEMENTS": {
         "TITLE": "Movements"
     },

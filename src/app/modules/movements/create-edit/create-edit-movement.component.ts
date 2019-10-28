@@ -8,7 +8,8 @@ import * as selectn from 'selectn';
 import { TypesService } from 'app/services/types.service';
 import { MovementsService } from 'app/services/movements.service';
 import * as moment from 'moment';
-import { DEFAULT_FORMAT } from 'app/utils/constants/dates';
+import { DEFAULT_FORMAT, HOUR_MINUTES } from 'app/utils/constants/dates';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-create-edit-movement',
@@ -27,6 +28,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
         private typesService: TypesService,
         private movementsService: MovementsService,
         private notificationService: NotificationService,
+        private translateService: TranslateService,
         public dialogRef: MatDialogRef<CreateEditMovementDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any = {},
     ) { }
@@ -40,8 +42,8 @@ export class CreateEditMovementDialogComponent implements OnInit {
     private mapInitialData() {
         this.movement = this.data.movement || {};
         if (this.movement.id) {
-            this.movement.hour = moment(this.movement.creationDate).format('HH:MM');
             this.movement.date = new Date(this.movement.creationDate);
+            this.movement.hour = moment(this.movement.date).format(HOUR_MINUTES);
         }
     }
 
@@ -70,16 +72,16 @@ export class CreateEditMovementDialogComponent implements OnInit {
     private save() {
         let result: any;
 
-        this.homologateDate();
+        const movement = this.homologateDate();
 
         if (this.isEdit) {
-            result = this.movementsService.update(this.movement);
+            result = this.movementsService.update(movement);
         } else {
-            result = this.movementsService.add(this.movement);
+            result = this.movementsService.add(movement);
         }
 
-        result.subscribe(({ message }) => {
-            this.notificationService.success(message);
+        result.subscribe(() => {
+            this.notificationService.success(this.translateService.instant('MESSAGES.ACTION_SUCCESS'));
             this.dialogRef.close(true);
         }, err => {
             this.notificationService.error(ManageException.handle(err));
@@ -87,10 +89,13 @@ export class CreateEditMovementDialogComponent implements OnInit {
     }
 
     private homologateDate() {
-        const time = this.movement.hour.split(':');
-        const creationDate = moment(this.movement.date);
+        const movement = { ...this.movement };
+        const time = movement.hour.split(':');
+        const creationDate = moment(movement.date);
         creationDate.set({ h: time[0], m: time[1]});
-        this.movement.date = creationDate.format(DEFAULT_FORMAT);
+        movement.date = creationDate.format(DEFAULT_FORMAT);
+
+        return movement;
     }
 
     get isEdit() {
