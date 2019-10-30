@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
 import { CategoriesService } from 'app/services/categories.service';
 import { NotificationService } from 'app/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as selectn from 'selectn';
@@ -19,6 +19,7 @@ export class CreateEditCategoryDialogComponent implements OnInit {
     constructor(
         private categoriesService: CategoriesService,
         private notificationService: NotificationService,
+        private translateService: TranslateService,
         public dialogRef: MatDialogRef<CreateEditCategoryDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any = {},
     ) { }
@@ -36,8 +37,8 @@ export class CreateEditCategoryDialogComponent implements OnInit {
             result = this.categoriesService.add(this.category);
         }
 
-        result.subscribe(({ data }) => {
-            this.notificationService.success(data);
+        result.subscribe(() => {
+            this.notificationService.success(this.translateService.instant('MESSAGES.ACTION_SUCCESS'));
             this.dialogRef.close(true);
         }, err => {
             this.notificationService.error(ManageException.handle(err));

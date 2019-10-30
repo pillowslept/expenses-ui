@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE, CATEGORIES_COLUMNS } from 'app/utils/constants/categories';
 import { NotificationService } from 'app/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -28,6 +29,7 @@ export class CategoriesComponent implements OnInit {
     constructor(
         private categoriesService: CategoriesService,
         private notificationService: NotificationService,
+        private translateService: TranslateService,
         private dialogService: DialogService,
     ) { }
 
@@ -46,8 +48,8 @@ export class CategoriesComponent implements OnInit {
     }
 
     private inactivate(categoryId: number) {
-        this.categoriesService.inactivate(categoryId).subscribe(({ data }) => {
-            this.notificationService.success(data);
+        this.categoriesService.inactivate(categoryId).subscribe(() => {
+            this.notificationService.success(this.translateService.instant('MESSAGES.ACTION_SUCCESS'));
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
@@ -55,8 +57,8 @@ export class CategoriesComponent implements OnInit {
     }
 
     private activate(categoryId: number) {
-        this.categoriesService.activate(categoryId).subscribe(({ data }) => {
-            this.notificationService.success(data);
+        this.categoriesService.activate(categoryId).subscribe(() => {
+            this.notificationService.success(this.translateService.instant('MESSAGES.ACTION_SUCCESS'));
             this.loadCategories();
         }, err => {
             this.notificationService.error(ManageException.handle(err));

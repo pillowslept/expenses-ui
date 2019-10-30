@@ -1,1 +1,1 @@
-export const MOVEMENTS_COLUMNS = ['id', 'creationDate', 'categoryDescription', 'value', 'observations', 'actions'];
+export const MOVEMENTS_COLUMNS = ['id', 'creationDate', 'category.description', 'value', 'observations', 'actions'];
