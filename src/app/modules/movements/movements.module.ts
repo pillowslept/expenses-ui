@@ -24,9 +24,6 @@ import { CreateEditMovementDialogComponent } from './create-edit/create-edit-mov
         MovementsComponent,
         CreateEditMovementDialogComponent,
     ],
-    exports: [
-        MovementsComponent
-    ],
     providers: [
         MovementsService,
         CategoriesService,

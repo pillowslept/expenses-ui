@@ -44,6 +44,8 @@ export class CreateEditMovementDialogComponent implements OnInit {
         if (this.movement.id) {
             this.movement.date = new Date(this.movement.creationDate);
             this.movement.hour = moment(this.movement.date).format(HOUR_MINUTES);
+            this.movement.categoryId = selectn('category.id', this.movement) || '';
+            this.movement.typeId = selectn('type.id', this.movement) || '';
         }
     }
 

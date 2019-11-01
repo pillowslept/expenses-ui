@@ -27,6 +27,7 @@
         "CONFIRM_MESSAGE": "Are you sure you want to perform the requested action?",
         "CREATE": "Create",
         "EDIT": "Edit",
+        "GENERATE": "Generate",
         "GO_BACK": "Go back",
         "MIN_CHARS": "Character minimum",
         "NEW": "New",

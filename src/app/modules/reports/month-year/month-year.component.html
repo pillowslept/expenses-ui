@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="40">
+        <mat-form-field fxFlex="48">
+            <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
+            <mat-select [(value)]="selectedYear">
+                <mat-option [value]="0" disabled>{{ 'GENERAL.CHOOSE_AN_OPTION' | translate }}</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year?.id">
+                    {{ year?.description }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="48">
+            <mat-label>{{ 'FILTERS.BY_MONTH' | translate }}</mat-label>
+            <mat-select [(value)]="selectedMonth">
+                <mat-option [value]="0" disabled>{{ 'GENERAL.CHOOSE_AN_OPTION' | translate }}</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month?.id">
+                    {{ month?.description | titlecase }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="generateReport()" [disabled]="!isValidData">
+        {{ 'GENERAL.GENERATE' | translate }}
+    </button>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="url">
+    <object [data]="url" type="application/pdf">
+        <p>Your browser does not support PDFs. <a href="url">Download the PDF</a>.</p>
+    </object>
+</div>
