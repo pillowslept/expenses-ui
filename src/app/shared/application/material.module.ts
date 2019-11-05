@@ -18,6 +18,7 @@ import {
     MatSnackBarModule,
     MatProgressBarModule,
     MatDialogModule,
+    MatDividerModule,
 } from '@angular/material';
 
 const modules = [
@@ -39,6 +40,7 @@ const modules = [
     MatSnackBarModule,
     MatProgressBarModule,
     MatDialogModule,
+    MatDividerModule,
 ];
 
 @NgModule({

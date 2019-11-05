@@ -43,6 +43,7 @@
         "TITLE": "Movements"
     },
     "REPORTS": {
+        "SELECT_FILTERS": "Select the filters to view the reports",
         "TITLE": "Reports"
     },
     "TYPES": {

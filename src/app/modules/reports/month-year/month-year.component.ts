@@ -28,14 +28,14 @@ export class MonthYearReportComponent implements OnInit {
     }
 
     private searchFilters() {
-        this.filtersService.get().subscribe(({ data }) => {
+        this.filtersService.getMonths().subscribe(({ data }) => {
             this.months = data;
-            this.years = [{ id: 2019, description: '2019'}];
             this.selectedMonth = new Date().getMonth() + 1;
-            this.selectedYear = this.years[0].id;
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
+        this.years = this.filtersService.getYears();
+        this.selectedYear = this.years[0].id;
     }
 
     get isValidData() {

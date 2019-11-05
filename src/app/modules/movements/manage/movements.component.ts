@@ -45,15 +45,15 @@ export class MovementsComponent implements OnInit {
     }
 
     private searchFilters() {
-        this.filtersService.get().subscribe(({ data }) => {
+        this.filtersService.getMonths().subscribe(({ data }) => {
             this.months = data;
-            this.years = [{ id: 2019, description: '2019'}];
             this.monthsFilter = new Date().getMonth() + 1;
-            this.yearFilter = this.years[0].id;
             this.filterByMonthAndYear();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
+        this.years = this.filtersService.getYears();
+        this.yearFilter = this.years[0].id;
     }
 
     private searchMovements() {

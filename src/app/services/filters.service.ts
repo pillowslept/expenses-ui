@@ -13,8 +13,12 @@ export class FiltersService {
         private http: HttpClient
     ) { }
 
-    get(): Observable<any> {
+    getMonths(): Observable<any> {
         return this.http.get(`${this.URL}/months/${this.language}`);
+    }
+
+    getYears() {
+        return [{ id: 2019, description: '2019'}];
     }
 
 }
