@@ -36,6 +36,24 @@
             "INACTIVE": "Inactivo"
         }
     },
+    "HOME": {
+        "DRAW": {
+            "TITLE": "Crea y maneja tus propias categorías",
+            "SUBTITLE": "Organizar"
+        },
+        "MANAGE": {
+            "TITLE": "Guarda un registro por cada movimiento de dinero",
+            "SUBTITLE": "Dinero"
+        },
+        "REPORT": {
+            "TITLE": "Genera reportes en PDF y XLS con todos los movimientos",
+            "SUBTITLE": "Reporte"
+        },
+        "SAVE": {
+            "TITLE": "Visualiza gráficas con el resumen de los movimientos",
+            "SUBTITLE": "Gráfica"
+        }        
+    },
     "MESSAGES": {
         "ACTION_SUCCESS": "Acción ejecutada correctamente"
     },

@@ -25,13 +25,13 @@ export class MovementsComponent implements OnInit {
     private readonly ALL_OPTION = 0;
     public displayedColumns: string[] = MOVEMENTS_COLUMNS;
     public movements: MatTableDataSource<Movement>;
-    public months: any = [];
+    public months: Array<any> = [];
     public monthsFilter: number;
     public yearFilter: number;
-    public years: any = [];
-    public pageNumber = INITIAL_PAGE;
-    public pageSize = PAGE_SIZE;
-    public readonly PAGE_SIZE_OPTIONS = PAGE_SIZE_OPTIONS;
+    public years: Array<any> = [];
+    public pageNumber: number = INITIAL_PAGE;
+    public pageSize: number = PAGE_SIZE;
+    public readonly PAGE_SIZE_OPTIONS: Array<number> = PAGE_SIZE_OPTIONS;
 
     constructor(
         private movementsService: MovementsService,

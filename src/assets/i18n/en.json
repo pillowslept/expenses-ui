@@ -36,6 +36,24 @@
             "INACTIVE": "Inactive"
         }
     },
+    "HOME": {
+        "DRAW": {
+            "TITLE": "Create and manage your own categories",
+            "SUBTITLE": "Organize"
+        },
+        "MANAGE": {
+            "TITLE": "Save a registry for every money movement",
+            "SUBTITLE": "Money"
+        },
+        "REPORT": {
+            "TITLE": "Generate PDF and XLS reports with all the movements",
+            "SUBTITLE": "Report"
+        },
+        "SAVE": {
+            "TITLE": "Visualize charts with the summary of the movements",
+            "SUBTITLE": "Chart"
+        }        
+    },
     "MESSAGES": {
         "ACTION_SUCCESS": "Action executed correctly"
     },

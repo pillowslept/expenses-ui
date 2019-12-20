@@ -11,10 +11,10 @@ import { ReportsService } from 'app/services/reports.service';
 })
 export class MonthYearReportComponent implements OnInit {
 
-    public months: any = [];
+    public months: Array<any> = [];
     public selectedMonth: number;
     public selectedYear: number;
-    public years: any = [];
+    public years: Array<any> = [];
     public url: any;
 
     constructor(

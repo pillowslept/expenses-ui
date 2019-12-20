@@ -1,33 +1,12 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px">
-    <mat-card fxFlex="25">
+<div fxLayout="row wrap" fxLayout.lt-sm="column wrap" fxLayoutGap="15px">
+    <mat-card *ngFor="let card of CARDS"
+        fxFlex="0 1 calc(25% - 15px)"
+        fxFlex.lt-md="0 1 calc(50% - 15px)"
+        fxFlex.lt-sm="100%">
         <mat-card-header>
-            <mat-card-title>Create and manage your own categories</mat-card-title>
-            <mat-card-subtitle>Organize</mat-card-subtitle>
+            <mat-card-title>{{ ('HOME.' + card?.name + '.TITLE') | translate }}</mat-card-title>
+            <mat-card-subtitle>{{ ('HOME.' + card?.name + '.SUBTITLE') | translate }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-icon mat-card-image class="icon">assignment</mat-icon>
-    </mat-card>
-
-    <mat-card fxFlex="25">
-        <mat-card-header>
-            <mat-card-title>Save a registry for every money movement</mat-card-title>
-            <mat-card-subtitle>Money</mat-card-subtitle>
-        </mat-card-header>
-        <mat-icon mat-card-image class="icon">attach_money</mat-icon>
-    </mat-card>
-
-    <mat-card fxFlex="25">
-        <mat-card-header>
-            <mat-card-title>Generate PDF and XLS reports with all the movements</mat-card-title>
-            <mat-card-subtitle>Report</mat-card-subtitle>
-        </mat-card-header>
-        <mat-icon mat-card-image class="icon">picture_as_pdf</mat-icon>
-    </mat-card>
-
-    <mat-card fxFlex="25">
-        <mat-card-header>
-            <mat-card-title>Visualize charts with the summary of the movements</mat-card-title>
-            <mat-card-subtitle>Chart</mat-card-subtitle>
-        </mat-card-header>
-        <mat-icon mat-card-image class="icon">pie_chart</mat-icon>
+        <mat-icon mat-card-image class="icon">{{ card?.icon }}</mat-icon>
     </mat-card>
 </div>
