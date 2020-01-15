@@ -1,0 +1,5 @@
+<mat-card fxLayout="row" fxLayoutAlign="start center" class="pointer" (click)="navigate()">
+    <mat-icon *ngIf="option?.icon">{{ option?.icon }}</mat-icon>
+    {{ option?.title | translate }}
+</mat-card>
+<mat-divider></mat-divider>
