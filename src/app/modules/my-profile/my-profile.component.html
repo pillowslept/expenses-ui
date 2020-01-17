@@ -1,0 +1,30 @@
+<div fxLayout="row" fxFlex="100" fxLayoutAlign="center">
+    <mat-card fxFlex="50" fxFlex.sm="70" fxFlex.xs="100">
+    <div fxLayoutAlign="space-between">
+            <div fxLayout="column">
+                <div class="title">{{ user?.name }}</div>
+                <div class="subtitle">{{ user?.lastname }}</div>
+            </div>
+            <img [src]="user?.image">
+        </div>
+        <mat-card-content class="user-content">
+            <div fxLayout="column">
+                <mat-form-field fxFlex="100">
+                    <input matInput [(ngModel)]="user.email"
+                        [placeholder]="'MY_PROFILE.EMAIL' | translate" autocomplete="off">
+                    <mat-icon matSuffix>contact_mail</mat-icon>
+                </mat-form-field>
+                <mat-form-field fxFlex="100">
+                    <input matInput [(ngModel)]="user.phone"
+                        [placeholder]="'MY_PROFILE.PHONE' | translate" autocomplete="off">
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-button>{{ 'GENERAL.CONFIRM' | translate }}</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,9 +1,16 @@
 <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-        <mat-toolbar class="home-actions">
-            <button mat-icon-button (click)="close()" routerLink="">
-                <mat-icon>home</mat-icon>
-            </button>
+        <mat-toolbar>
+            <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between">
+                <button mat-icon-button (click)="close()"
+                    [matTooltip]="'HOME.TITLE' | translate" routerLink="">
+                    <mat-icon>home</mat-icon>
+                </button>
+                <button mat-icon-button (click)="close()"
+                    [matTooltip]="'MY_PROFILE.TITLE' | translate" routerLink="/my-profile">
+                    <mat-icon>person</mat-icon>
+                </button>
+            </div>
         </mat-toolbar>
         <ng-container  *ngFor="let option of MENU_OPTIONS">
             <app-menu-item (close)="close()" [option]="option"></app-menu-item>

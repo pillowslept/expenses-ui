@@ -52,13 +52,19 @@
         "SAVE": {
             "TITLE": "Visualize charts with the summary of the movements",
             "SUBTITLE": "Chart"
-        }        
+        },
+        "TITLE": "Home"
     },
     "MESSAGES": {
         "ACTION_SUCCESS": "Action executed correctly"
     },
     "MOVEMENTS": {
         "TITLE": "Movements"
+    },
+    "MY_PROFILE": {
+        "TITLE": "My profile",
+        "PHONE": "Phone",
+        "EMAIL": "Email"
     },
     "REPORTS": {
         "SELECT_FILTERS": "Select the filters to view the reports",
