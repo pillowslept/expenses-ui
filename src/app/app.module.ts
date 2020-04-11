@@ -14,6 +14,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingIndicatorService } from './services/loading-indicator.service';
 import { RequestInterceptor } from './shared/interceptor/request.interceptor';
 
+export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader => {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+};
+
 @NgModule({
     imports: [
         ApplicationModule,
@@ -43,7 +47,3 @@ import { RequestInterceptor } from './shared/interceptor/request.interceptor';
     ],
 })
 export class AppModule { }
-
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}

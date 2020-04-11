@@ -13,13 +13,11 @@ export class SidenavComponent {
 
     public readonly MENU_OPTIONS: Array<any> = MENU_OPTIONS;
 
-    constructor() { }
-
-    close() {
+    close(): void {
         this.sidenav.close();
     }
 
-    open() {
+    open(): void {
         this.sidenav.open();
     }
 

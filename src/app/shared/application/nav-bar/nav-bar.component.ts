@@ -9,9 +9,7 @@ export class NavBarComponent {
 
     @Output() openMenu = new EventEmitter<any>();
 
-    constructor() { }
-
-    openSidenav() {
+    openSidenav(): void {
         this.openMenu.emit();
     }
 
