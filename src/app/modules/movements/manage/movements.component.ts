@@ -11,6 +11,7 @@ import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
 import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE } from 'app/utils/constants/tables';
 import { CreateEditMovementDialogComponent } from '../create-edit/create-edit-movement.component';
 import { DialogService } from 'app/services/dialog.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-movements',
@@ -34,17 +35,17 @@ export class MovementsComponent implements OnInit {
     public readonly PAGE_SIZE_OPTIONS: Array<number> = PAGE_SIZE_OPTIONS;
 
     constructor(
-        private movementsService: MovementsService,
-        private filtersService: FiltersService,
-        private notificationService: NotificationService,
-        private dialogService: DialogService,
+        private readonly movementsService: MovementsService,
+        private readonly filtersService: FiltersService,
+        private readonly notificationService: NotificationService,
+        private readonly dialogService: DialogService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.searchFilters();
     }
 
-    private searchFilters() {
+    private searchFilters(): void {
         this.filtersService.getMonths().subscribe(({ data }) => {
             this.months = data;
             this.monthsFilter = new Date().getMonth() + 1;
@@ -56,7 +57,7 @@ export class MovementsComponent implements OnInit {
         this.yearFilter = this.years[0].id;
     }
 
-    private searchMovements() {
+    private searchMovements(): void {
         this.movementsService.get(this.pageNumber, this.pageSize).subscribe(({ data }) => {
             this.movements = new MatTableDataSource(data);
             this.movements.sort = this.sort;
@@ -66,7 +67,7 @@ export class MovementsComponent implements OnInit {
         });
     }
 
-    filterMovements() {
+    filterMovements(): void {
         this.resetFilters();
         if (this.isValidMonth && this.isValidYear) {
             this.filterByMonthAndYear();
@@ -75,7 +76,7 @@ export class MovementsComponent implements OnInit {
         }
     }
 
-    private filterByMonthAndYear() {
+    private filterByMonthAndYear(): void {
         this.movementsService.getByMonthAndYear(
             this.monthsFilter, this.yearFilter, this.pageNumber, this.pageSize).subscribe(({ data }) => {
             this.movements = new MatTableDataSource(data);
@@ -86,39 +87,35 @@ export class MovementsComponent implements OnInit {
         });
     }
 
-    private resetFilters() {
+    private resetFilters(): void {
         this.pageNumber = 0;
         this.pageSize = 10;
     }
 
-    get isValidMonth() {
+    get isValidMonth(): boolean {
         return this.monthsFilter !== this.ALL_OPTION;
     }
 
-    get isValidYear() {
+    get isValidYear(): boolean {
         return this.yearFilter !== this.ALL_OPTION;
     }
 
-    applyFilter(filterValue: string) {
+    applyFilter(filterValue: string): void {
         this.movements.filter = filterValue.trim().toLowerCase();
     }
 
-    openCreateEditDialog(action: string, movement: any = {}): void {
-        const data = {
+    openCreateEditDialog(action: string, movement = {}): void {
+        const dialogRef = this.dialogService.open(CreateEditMovementDialogComponent, {
             width: '700px',
             data: {
                 action,
                 movement: { ...movement }
             }
-        };
-
-        const dialog = this.dialogService.open(CreateEditMovementDialogComponent, data);
-
-        dialog.subscribe((result: boolean) => {
-            if (result) {
-                this.searchFilters();
-            }
         });
+
+        dialogRef
+            .pipe(filter(result => result))
+            .subscribe(() => this.searchFilters());
     }
 
 }

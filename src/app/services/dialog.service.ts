@@ -7,7 +7,7 @@ import { ComponentType } from '@angular/cdk/portal';
 export class DialogService {
 
     constructor(
-        public matDialog: MatDialog,
+        private readonly matDialog: MatDialog,
     ) { }
 
     open(component: ComponentType<any>, data?: any): Observable<any> {

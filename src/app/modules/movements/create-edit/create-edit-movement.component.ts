@@ -18,29 +18,27 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CreateEditMovementDialogComponent implements OnInit {
 
-    public movement: any = {};
     public readonly OBS_MAX: number = 500;
     public categories: Array<any> = [];
     public types: Array<any> = [];
 
     constructor(
-        private categoriesService: CategoriesService,
-        private typesService: TypesService,
-        private movementsService: MovementsService,
-        private notificationService: NotificationService,
-        private translateService: TranslateService,
-        public dialogRef: MatDialogRef<CreateEditMovementDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any = {},
+        private readonly categoriesService: CategoriesService,
+        private readonly typesService: TypesService,
+        private readonly movementsService: MovementsService,
+        private readonly notificationService: NotificationService,
+        private readonly translateService: TranslateService,
+        private readonly dialogRef: MatDialogRef<CreateEditMovementDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public movement: any = {},
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.mapInitialData();
         this.getCategories();
         this.getTypes();
     }
 
-    private mapInitialData() {
-        this.movement = this.data.movement || {};
+    private mapInitialData(): void {
         if (this.movement.id) {
             this.movement.date = new Date(this.movement.creationDate);
             this.movement.hour = moment(this.movement.date).format(HOUR_MINUTES);
@@ -49,7 +47,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
         }
     }
 
-    private getTypes() {
+    private getTypes(): void {
         this.typesService.get().subscribe(({ data }) => {
             this.types = data;
         }, err => {
@@ -57,7 +55,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
         });
     }
 
-    private getCategories() {
+    private getCategories(): void {
         this.categoriesService.get().subscribe(({ data }) => {
             this.categories = data;
         }, err => {
@@ -65,13 +63,13 @@ export class CreateEditMovementDialogComponent implements OnInit {
         });
     }
 
-    process() {
+    process(): void {
         if (this.isValidData) {
             this.save();
         }
     }
 
-    private save() {
+    private save(): void {
         let result: any;
 
         const movement = this.homologateDate();
@@ -100,11 +98,11 @@ export class CreateEditMovementDialogComponent implements OnInit {
         return movement;
     }
 
-    get isEdit() {
-        return this.data.action === 'edit';
+    get isEdit(): boolean {
+        return this.movement.action === 'edit';
     }
 
-    get isValidData() {
+    get isValidData(): boolean {
         return !!selectn('categoryId', this.movement) && !!selectn('typeId', this.movement)
             && !!selectn('value', this.movement) && !!selectn('date', this.movement)
             && !!selectn('hour', this.movement) && !!selectn('observations', this.movement);
