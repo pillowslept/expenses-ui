@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as selectn from 'selectn';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-create-edit-category',
@@ -17,19 +18,19 @@ export class CreateEditCategoryDialogComponent implements OnInit {
     public readonly DEFAULT_MIN_CHARS: number = 5;
 
     constructor(
-        private categoriesService: CategoriesService,
-        private notificationService: NotificationService,
-        private translateService: TranslateService,
-        public dialogRef: MatDialogRef<CreateEditCategoryDialogComponent>,
+        private readonly categoriesService: CategoriesService,
+        private readonly notificationService: NotificationService,
+        private readonly translateService: TranslateService,
+        private readonly dialogRef: MatDialogRef<CreateEditCategoryDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any = {},
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.category = this.data.category || {};
     }
 
-    process() {
-        let result: any;
+    process(): void {
+        let result: Observable<any>;
 
         if (this.isEdit) {
             result = this.categoriesService.update(this.category);
@@ -45,11 +46,11 @@ export class CreateEditCategoryDialogComponent implements OnInit {
         });
     }
 
-    get isEdit() {
+    get isEdit(): boolean {
         return this.data.action === 'edit';
     }
 
-    get isValidData() {
+    get isValidData(): boolean {
         return !!selectn('description', this.category)
             && this.category.description.length >= this.DEFAULT_MIN_CHARS;
     }

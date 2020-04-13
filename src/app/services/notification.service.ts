@@ -13,7 +13,7 @@ export class NotificationService {
     };
 
     constructor(
-        private snackBar: MatSnackBar
+        private readonly snackBar: MatSnackBar
     ) { }
 
     private openSnack(message: string, css: string) {

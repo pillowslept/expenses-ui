@@ -9,7 +9,7 @@ export class CategoriesService {
     private readonly URL = `${ENV.api_route}categories`;
 
     constructor(
-        private http: HttpClient
+        private readonly http: HttpClient
     ) { }
 
     get(): Observable<any> {

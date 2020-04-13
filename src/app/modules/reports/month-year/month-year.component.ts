@@ -18,16 +18,16 @@ export class MonthYearReportComponent implements OnInit {
     public url: any;
 
     constructor(
-        private reportsService: ReportsService,
-        private filtersService: FiltersService,
-        private notificationService: NotificationService,
+        private readonly reportsService: ReportsService,
+        private readonly filtersService: FiltersService,
+        private readonly notificationService: NotificationService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.searchFilters();
     }
 
-    private searchFilters() {
+    private searchFilters(): void {
         this.filtersService.getMonths().subscribe(({ data }) => {
             this.months = data;
             this.selectedMonth = new Date().getMonth() + 1;
@@ -38,11 +38,11 @@ export class MonthYearReportComponent implements OnInit {
         this.selectedYear = this.years[0].id;
     }
 
-    get isValidData() {
+    get isValidData(): boolean {
         return !!this.selectedMonth && !!this.selectedYear;
     }
 
-    generateReport() {
+    generateReport(): void {
         if (this.isValidData) {
             this.url = this.reportsService.byMonthAndYear(this.selectedMonth, this.selectedYear);
         }

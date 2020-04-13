@@ -9,7 +9,7 @@ export class MovementsService {
     private readonly URL = `${ENV.api_route}movements`;
 
     constructor(
-        private http: HttpClient
+        private readonly http: HttpClient
     ) { }
 
     getAll(): Observable<any> {

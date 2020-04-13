@@ -10,7 +10,7 @@ export class FiltersService {
     private readonly language = 'es-CO';
 
     constructor(
-        private http: HttpClient
+        private readonly http: HttpClient
     ) { }
 
     getMonths(): Observable<any> {

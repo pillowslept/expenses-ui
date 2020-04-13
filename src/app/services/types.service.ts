@@ -9,7 +9,7 @@ export class TypesService {
     private readonly URL = `${ENV.api_route}types`;
 
     constructor(
-        private http: HttpClient
+        private readonly http: HttpClient
     ) { }
 
     get(): Observable<any> {
