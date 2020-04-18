@@ -1,3 +1,4 @@
+import { Category } from 'app/entities/category';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { ACTIVE, INACTIVE, CATEGORIES_COLUMNS } from 'app/utils/constants/categories';
@@ -25,7 +26,7 @@ export class CategoriesComponent implements OnInit {
     public readonly ACTIVE = ACTIVE;
     public readonly INACTIVE = INACTIVE;
     public displayedColumns: string[] = CATEGORIES_COLUMNS;
-    public categories: MatTableDataSource<any>;
+    public categories: MatTableDataSource<Category>;
 
     constructor(
         private readonly categoriesService: CategoriesService,
@@ -69,10 +70,7 @@ export class CategoriesComponent implements OnInit {
     openDialog(action: string, category = {}): void {
         const dialogRef = this.dialogService.open(CreateEditCategoryDialogComponent, {
             width: '400px',
-            data: {
-                action,
-                category: { ...category }
-            }
+            data: { ...category },
         });
 
         dialogRef
@@ -81,17 +79,17 @@ export class CategoriesComponent implements OnInit {
     }
 
     confirmAction(action: string, categoryId: number): void {
-        const dialog = this.dialogService.open(ConfirmActionDialogComponent);
+        const dialogRef = this.dialogService.open(ConfirmActionDialogComponent);
 
-        dialog.subscribe((result: boolean) => {
-            if (result) {
+        dialogRef
+            .pipe(filter(result => result))
+            .subscribe(() => {
                 if (action === 'activate') {
                     this.activate(categoryId);
                 } else {
                     this.inactivate(categoryId);
                 }
-            }
-        });
+            });
     }
 
 }

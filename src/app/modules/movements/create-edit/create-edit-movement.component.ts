@@ -1,5 +1,5 @@
+import { Category } from 'app/entities/category';
 import { Component, OnInit, Inject } from '@angular/core';
-
 import { CategoriesService } from 'app/services/categories.service';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
@@ -10,6 +10,7 @@ import { MovementsService } from 'app/services/movements.service';
 import * as moment from 'moment';
 import { DEFAULT_FORMAT, HOUR_MINUTES } from 'app/utils/constants/dates';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-create-edit-movement',
@@ -19,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CreateEditMovementDialogComponent implements OnInit {
 
     public readonly OBS_MAX: number = 500;
-    public categories: Array<any> = [];
+    public categories: Category[];
     public types: Array<any> = [];
 
     constructor(
@@ -70,7 +71,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
     }
 
     private save(): void {
-        let result: any;
+        let result: Observable<void>;
 
         const movement = this.homologateDate();
 

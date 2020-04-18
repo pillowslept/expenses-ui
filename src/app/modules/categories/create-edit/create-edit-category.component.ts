@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Category } from 'app/entities/category';
+import { Component, Inject } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { NotificationService } from 'app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,9 +13,8 @@ import { Observable } from 'rxjs';
     templateUrl: './create-edit-category.component.html',
     styleUrls: ['./create-edit-category.component.scss']
 })
-export class CreateEditCategoryDialogComponent implements OnInit {
+export class CreateEditCategoryDialogComponent {
 
-    public category: any = {};
     public readonly DEFAULT_MIN_CHARS: number = 5;
 
     constructor(
@@ -22,15 +22,11 @@ export class CreateEditCategoryDialogComponent implements OnInit {
         private readonly notificationService: NotificationService,
         private readonly translateService: TranslateService,
         private readonly dialogRef: MatDialogRef<CreateEditCategoryDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any = {},
+        @Inject(MAT_DIALOG_DATA) public category = new Category(),
     ) { }
 
-    ngOnInit(): void {
-        this.category = this.data.category || {};
-    }
-
     process(): void {
-        let result: Observable<any>;
+        let result: Observable<void>;
 
         if (this.isEdit) {
             result = this.categoriesService.update(this.category);
@@ -47,7 +43,7 @@ export class CreateEditCategoryDialogComponent implements OnInit {
     }
 
     get isEdit(): boolean {
-        return this.data.action === 'edit';
+        return !!this.category.id;
     }
 
     get isValidData(): boolean {

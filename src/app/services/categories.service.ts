@@ -1,3 +1,4 @@
+import { Category } from 'app/entities/category';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,11 +21,11 @@ export class CategoriesService {
         return this.http.get(`${this.URL}/${id}`);
     }
 
-    add(category): Observable<any> {
+    add(category: Category): Observable<any> {
         return this.http.post(this.URL, category);
     }
 
-    update(category): Observable<any> {
+    update(category: Category): Observable<any> {
         return this.http.put(`${this.URL}/${category.id}`, category);
     }
 
