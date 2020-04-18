@@ -17,8 +17,8 @@ export class FiltersService {
         return this.http.get(`${this.URL}/months/${this.language}`);
     }
 
-    getYears() {
-        return [{ id: 2019, description: '2019'}];
+    getYears(): any[] {
+        return [{ id: 2019, description: '2019' }];
     }
 
 }

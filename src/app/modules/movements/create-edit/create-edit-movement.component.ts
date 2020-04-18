@@ -93,7 +93,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
         const movement = { ...this.movement };
         const time = movement.hour.split(':');
         const creationDate = moment(movement.date);
-        creationDate.set({ h: time[0], m: time[1]});
+        creationDate.set({ h: time[0], m: time[1] });
         movement.date = creationDate.format(DEFAULT_FORMAT);
 
         return movement;

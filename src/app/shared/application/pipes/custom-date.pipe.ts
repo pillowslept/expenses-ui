@@ -6,12 +6,7 @@ import { TWELVE_HOURS_FORMAT } from 'app/utils/constants/dates';
 export class CustomDatePipe implements PipeTransform {
 
     transform(value: string): string {
-        let date = '';
-        if (!!value) {
-            date = moment(value).format(TWELVE_HOURS_FORMAT);
-        }
-
-        return date;
+        return value ? moment(value).format(TWELVE_HOURS_FORMAT) : '';
     }
 
 }

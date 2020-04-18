@@ -15,7 +15,7 @@ export class MenuItemComponent {
         private router: Router,
     ) { }
 
-    navigate() {
+    navigate(): void {
         this.close.emit();
         this.router.navigateByUrl(this.option.route);
     }

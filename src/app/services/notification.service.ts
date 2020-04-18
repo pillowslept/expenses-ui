@@ -16,26 +16,26 @@ export class NotificationService {
         private readonly snackBar: MatSnackBar
     ) { }
 
-    private openSnack(message: string, css: string) {
+    private openSnack(message: string, css: string): void {
         this.snackBar.open(message, 'Close', {
             ...this.PARAMS,
             panelClass: css
         });
     }
 
-    success(message: string) {
+    success(message: string): void {
         this.openSnack(message, 'green-snack');
     }
 
-    error(message: string = '') {
+    error(message: string): void {
         this.openSnack(message, 'red-snack');
     }
 
-    warning(message: string) {
+    warning(message: string): void {
         this.openSnack(message, 'yellow-snack');
     }
 
-    info(message: string) {
+    info(message: string): void {
         this.openSnack(message, 'info-snack');
     }
 

@@ -12,12 +12,12 @@ export class AppComponent implements AfterContentChecked {
 
     private readonly AVAILABLE_LANGS = ['en', 'es'];
     private readonly DEFAULT_LANG = ENV.default_lang;
-    public isLoading: boolean = false;
+    public isLoading = false;
 
     constructor(
-        private translate: TranslateService,
-        private loadingIndicatorService: LoadingIndicatorService,
-        private changeDetectorRef: ChangeDetectorRef,
+        private readonly translate: TranslateService,
+        private readonly loadingIndicatorService: LoadingIndicatorService,
+        private readonly changeDetectorRef: ChangeDetectorRef,
     ) {
         const navigatorLang = navigator.language.split('-')[0];
         this.translate.setDefaultLang(this.DEFAULT_LANG);
@@ -26,7 +26,7 @@ export class AppComponent implements AfterContentChecked {
         this.loadingIndicatorService.onLoadingChanged.subscribe((isLoading: boolean) => this.isLoading = isLoading);
     }
 
-    ngAfterContentChecked() {
+    ngAfterContentChecked(): void {
         this.changeDetectorRef.detectChanges();
     }
 
