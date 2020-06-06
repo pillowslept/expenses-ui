@@ -21,7 +21,7 @@ import { filter } from 'rxjs/operators';
 export class CategoriesComponent implements OnInit {
 
     @ViewChild(MatSort, { static: true }) sort: MatSort;
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     public readonly ACTIVE = ACTIVE;
     public readonly INACTIVE = INACTIVE;

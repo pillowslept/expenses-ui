@@ -21,7 +21,7 @@ import { filter } from 'rxjs/operators';
 export class MovementsComponent implements OnInit {
 
     @ViewChild(MatSort, { static: true }) sort: MatSort;
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     private readonly ALL_OPTION = 0;
     public displayedColumns: string[] = MOVEMENTS_COLUMNS;
