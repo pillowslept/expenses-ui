@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class NavBarComponent {
 
-    @Output() openMenu = new EventEmitter<any>();
+    @Output() openMenu = new EventEmitter<void>();
 
     openSidenav(): void {
         this.openMenu.emit();

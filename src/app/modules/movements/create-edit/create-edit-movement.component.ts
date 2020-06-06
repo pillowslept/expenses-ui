@@ -19,6 +19,8 @@ import { Observable } from 'rxjs';
 })
 export class CreateEditMovementDialogComponent implements OnInit {
 
+    public movement: any;
+    private action: string;
     public readonly OBS_MAX: number = 500;
     public categories: Category[];
     public types: Array<any> = [];
@@ -30,10 +32,12 @@ export class CreateEditMovementDialogComponent implements OnInit {
         private readonly notificationService: NotificationService,
         private readonly translateService: TranslateService,
         private readonly dialogRef: MatDialogRef<CreateEditMovementDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public movement: any = {},
+        @Inject(MAT_DIALOG_DATA) private data: any = {},
     ) { }
 
     ngOnInit(): void {
+        this.movement = this.data.movement;
+        this.action = this.data.action;
         this.mapInitialData();
         this.getCategories();
         this.getTypes();
@@ -100,7 +104,7 @@ export class CreateEditMovementDialogComponent implements OnInit {
     }
 
     get isEdit(): boolean {
-        return this.movement.action === 'edit';
+        return this.action === 'edit';
     }
 
     get isValidData(): boolean {

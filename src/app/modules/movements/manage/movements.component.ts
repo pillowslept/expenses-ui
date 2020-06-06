@@ -88,8 +88,8 @@ export class MovementsComponent implements OnInit {
     }
 
     private resetFilters(): void {
-        this.pageNumber = 0;
-        this.pageSize = 10;
+        this.pageNumber = INITIAL_PAGE;
+        this.pageSize = PAGE_SIZE;
     }
 
     get isValidMonth(): boolean {
