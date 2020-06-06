@@ -31,8 +31,7 @@
                 "src/styles.scss"
               ],
               "scripts": [
-                "node_modules/jquery/dist/jquery.min.js",
-                "node_modules/hammerjs/hammer.js"
+                "node_modules/jquery/dist/jquery.min.js"
               ],
               "es5BrowserSupport": true
             },
