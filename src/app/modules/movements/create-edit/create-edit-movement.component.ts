@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CategoriesService } from 'app/services/categories.service';
 import { NotificationService } from 'app/services/notification.service';
 import { ManageException } from 'app/utils/exceptions/manage-exceptions';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as selectn from 'selectn';
 import { TypesService } from 'app/services/types.service';
 import { MovementsService } from 'app/services/movements.service';

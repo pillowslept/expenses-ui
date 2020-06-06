@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment as ENV } from 'environments/environment';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class NotificationService {
