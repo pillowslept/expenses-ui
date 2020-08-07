@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators';
 export class RequestInterceptor implements HttpInterceptor {
 
     constructor(
-        private loadingIndicatorService: LoadingIndicatorService
+        private readonly loadingIndicatorService: LoadingIndicatorService
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

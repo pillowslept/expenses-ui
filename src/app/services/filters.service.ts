@@ -18,7 +18,7 @@ export class FiltersService {
     }
 
     getYears(): any[] {
-        return [{ id: 2019, description: '2019' }];
+        return [2019, 2020].map((year) => ({ id: year, description: year }));
     }
 
 }

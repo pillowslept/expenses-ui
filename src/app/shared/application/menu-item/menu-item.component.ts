@@ -12,7 +12,7 @@ export class MenuItemComponent {
     @Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
-        private router: Router,
+        private readonly router: Router,
     ) { }
 
     navigate(): void {
