@@ -8,10 +8,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
-import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE } from 'app/utils/constants/tables';
+import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE, DEFAULT_PAGINATION } from 'app/utils/constants/tables';
 import { CreateEditMovementDialogComponent } from '../create-edit/create-edit-movement.component';
 import { DialogService } from 'app/services/dialog.service';
 import { filter } from 'rxjs/operators';
+import * as selectn from 'selectn';
 
 @Component({
     selector: 'app-movements',
@@ -30,8 +31,7 @@ export class MovementsComponent implements OnInit {
     public monthsFilter: number;
     public yearFilter: number;
     public years: Array<any> = [];
-    public pageNumber: number = INITIAL_PAGE;
-    public pageSize: number = PAGE_SIZE;
+    public pagination = { ...DEFAULT_PAGINATION };
     public readonly PAGE_SIZE_OPTIONS: Array<number> = PAGE_SIZE_OPTIONS;
 
     constructor(
@@ -46,50 +46,59 @@ export class MovementsComponent implements OnInit {
     }
 
     private searchFilters(): void {
+        this.years = this.filtersService.getYears();
+        this.yearFilter = this.years[0].id;
         this.filtersService.getMonths().subscribe(({ data }) => {
             this.months = data;
             this.monthsFilter = new Date().getMonth() + 1;
-            this.filterByMonthAndYear();
+            this.applyFilters();
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
-        this.years = this.filtersService.getYears();
-        this.yearFilter = this.years[0].id;
     }
 
-    private searchMovements(): void {
-        this.movementsService.get(this.pageNumber, this.pageSize).subscribe(({ data }) => {
-            this.movements = new MatTableDataSource(data);
+    private searchMovements(filters = {}): void {
+        const { pageNumber, pageSize } = this.pagination;
+        this.movementsService.getByFilters(pageNumber, pageSize, filters).subscribe(({ data }) => {
+            this.movements = new MatTableDataSource(selectn('content', data) || []);
+            this.pagination.total = selectn('totalElements', data) || 0;
             this.movements.sort = this.sort;
-            this.movements.paginator = this.paginator;
         }, err => {
             this.notificationService.error(ManageException.handle(err));
         });
+    }
+
+    paginate({ pageIndex, pageSize }): void {
+        this.pagination.pageNumber = pageIndex;
+        this.pagination.pageSize = pageSize;
+        this.applyFilters();
     }
 
     filterMovements(): void {
-        this.resetFilters();
-        if (this.isValidMonth && this.isValidYear) {
-            this.filterByMonthAndYear();
+        if (this.areValidFilters) {
+            this.resetFilters();
+        }
+        this.applyFilters();
+    }
+
+    private applyFilters(): void {
+        if (this.areValidFilters) {
+            const filters = {
+                month: this.monthsFilter,
+                year: this.yearFilter,
+            };
+            this.searchMovements(filters);
         } else if (!this.isValidMonth && !this.isValidYear) {
             this.searchMovements();
         }
     }
 
-    private filterByMonthAndYear(): void {
-        this.movementsService.getByMonthAndYear(
-            this.monthsFilter, this.yearFilter, this.pageNumber, this.pageSize).subscribe(({ data }) => {
-            this.movements = new MatTableDataSource(data);
-            this.movements.sort = this.sort;
-            this.movements.paginator = this.paginator;
-        }, err => {
-            this.notificationService.error(ManageException.handle(err));
-        });
-    }
-
     private resetFilters(): void {
-        this.pageNumber = INITIAL_PAGE;
-        this.pageSize = PAGE_SIZE;
+        this.pagination.pageNumber = INITIAL_PAGE;
+        this.pagination.pageSize = PAGE_SIZE;
+        if (this.paginator) {
+            this.paginator.pageIndex = 0;
+        }
     }
 
     get isValidMonth(): boolean {
@@ -100,7 +109,11 @@ export class MovementsComponent implements OnInit {
         return this.yearFilter !== this.ALL_OPTION;
     }
 
-    applyFilter(filterValue: string): void {
+    private get areValidFilters(): boolean {
+        return this.isValidMonth && this.isValidYear;
+    }
+
+    applyTableFilter(filterValue: string): void {
         this.movements.filter = filterValue.trim().toLowerCase();
     }
 
@@ -115,7 +128,7 @@ export class MovementsComponent implements OnInit {
 
         dialogRef
             .pipe(filter(result => result))
-            .subscribe(() => this.searchFilters());
+            .subscribe(() => this.applyFilters());
     }
 
 }

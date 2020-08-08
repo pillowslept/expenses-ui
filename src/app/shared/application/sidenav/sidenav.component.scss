@@ -9,3 +9,15 @@ mat-sidenav-container {
 mat-sidenav {
     width: 20%;
 }
+
+@media (max-width: 800px) {
+    mat-sidenav {
+        width: 40%;
+    }
+}
+
+@media (max-width: 400px) {
+    mat-sidenav {
+        width: 60%;
+    }
+}

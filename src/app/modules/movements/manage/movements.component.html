@@ -28,7 +28,7 @@
     <mat-form-field *ngIf="movements?.data?.length" fxFlex="40">
         <input
             matInput
-            (keyup)="applyFilter($event.target.value)"
+            (keyup)="applyTableFilter($event?.target?.value)"
             [placeholder]="'FILTERS.TITLE' | translate"
             autocomplete="off">
         <mat-icon matSuffix>search</mat-icon>
@@ -73,4 +73,7 @@
 <mat-paginator
     *ngIf="movements?.data?.length"
     [pageSizeOptions]="PAGE_SIZE_OPTIONS"
-    [length]="movements?.data?.length"></mat-paginator>
+    [pageSize]="pagination?.pageSize"
+    [length]="pagination?.total"
+    (page)="paginate($event)">
+</mat-paginator>
