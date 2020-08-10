@@ -6,3 +6,7 @@ export const DEFAULT_PAGINATION = {
     pageSize: PAGE_SIZE,
     total: 0,
 };
+export const SORT_OPTIONS = {
+    ASC: 'asc',
+    DESC: 'desc',
+};

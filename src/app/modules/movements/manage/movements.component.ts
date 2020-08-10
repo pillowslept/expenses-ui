@@ -8,7 +8,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MOVEMENTS_COLUMNS } from 'app/utils/constants/movements';
-import { PAGE_SIZE_OPTIONS, PAGE_SIZE, INITIAL_PAGE, DEFAULT_PAGINATION } from 'app/utils/constants/tables';
+import {
+    PAGE_SIZE_OPTIONS,
+    PAGE_SIZE,
+    INITIAL_PAGE,
+    DEFAULT_PAGINATION,
+    SORT_OPTIONS,
+} from 'app/utils/constants/tables';
 import { CreateEditMovementDialogComponent } from '../create-edit/create-edit-movement.component';
 import { DialogService } from 'app/services/dialog.service';
 import { filter } from 'rxjs/operators';
@@ -31,6 +37,7 @@ export class MovementsComponent implements OnInit {
     public monthsFilter: number;
     public yearFilter: number;
     public years: Array<any> = [];
+    public sortType = SORT_OPTIONS.ASC;
     public pagination = { ...DEFAULT_PAGINATION };
     public readonly PAGE_SIZE_OPTIONS: Array<number> = PAGE_SIZE_OPTIONS;
 
@@ -82,14 +89,18 @@ export class MovementsComponent implements OnInit {
     }
 
     private applyFilters(): void {
+        const filters = {
+            sortType: this.sortType,
+        };
         if (this.areValidFilters) {
-            const filters = {
+            const newFilters = {
+                ...filters,
                 month: this.monthsFilter,
                 year: this.yearFilter,
             };
-            this.searchMovements(filters);
+            this.searchMovements(newFilters);
         } else if (!this.isValidMonth && !this.isValidYear) {
-            this.searchMovements();
+            this.searchMovements(filters);
         }
     }
 
@@ -115,6 +126,15 @@ export class MovementsComponent implements OnInit {
 
     applyTableFilter(filterValue: string): void {
         this.movements.filter = filterValue.trim().toLowerCase();
+    }
+
+    changeSort(): void {
+        this.sortType = this.isAscSort ? SORT_OPTIONS.DESC : SORT_OPTIONS.ASC;
+        this.applyFilters();
+    }
+
+    get isAscSort(): boolean {
+        return this.sortType === SORT_OPTIONS.ASC;
     }
 
     openCreateEditDialog(action: string, movement = {}): void {

@@ -14,6 +14,10 @@ mat-sidenav {
     mat-sidenav {
         width: 40%;
     }
+
+    .router-container {
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 400px) {
