@@ -1,6 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="40">
-        <mat-form-field fxFlex="48">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="1rem"
+        fxLayoutAlign="left center" fxLayoutAlign.lt-sm="space-between"
+        fxFlex="90" fxFlex.lt-sm="80">
+        <mat-form-field fxFlex="10" fxFlex.lt-md="20">
             <mat-label>{{ 'FILTERS.BY_YEAR' | translate }}</mat-label>
             <mat-select [(value)]="yearFilter" (selectionChange)="filterMovements()">
                 <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
@@ -9,7 +11,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field fxFlex="48">
+        <mat-form-field fxFlex="20" fxFlex.lt-md="30">
             <mat-label>{{ 'FILTERS.BY_MONTH' | translate }}</mat-label>
             <mat-select [(value)]="monthsFilter" (selectionChange)="filterMovements()">
                 <mat-option [value]="0">{{ 'GENERAL.ALL' | translate }}</mat-option>
@@ -18,6 +20,9 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <button mat-icon-button (click)="changeSort()" [matTooltip]="'GENERAL.CHANGE_SORT' | translate">
+            <mat-icon>{{ isAscSort ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+        </button>
     </div>
     <button mat-raised-button color="primary" (click)="openCreateEditDialog('create')">
         {{ 'GENERAL.CREATE' | translate }}
@@ -25,7 +30,7 @@
 </div>
 
 <div fxLayout="row">
-    <mat-form-field *ngIf="movements?.data?.length" fxFlex="40">
+    <mat-form-field *ngIf="movements?.data?.length" fxFlex="30" fxFlex.lt-sm="80">
         <input
             matInput
             (keyup)="applyTableFilter($event?.target?.value)"

@@ -22,6 +22,7 @@
         "ACTIONS": "Actions",
         "ALL": "All",
         "CANCEL": "Cancel",
+        "CHANGE_SORT": "Change sort",
         "CHOOSE_AN_OPTION": "Choose an option",
         "CONFIRM": "Confirm",
         "CONFIRM_MESSAGE": "Are you sure you want to perform the requested action?",
@@ -72,5 +73,5 @@
     },
     "TYPES": {
         "TITLE": "Types"
-    }  
+    }
 }

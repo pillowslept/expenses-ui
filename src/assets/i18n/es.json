@@ -22,6 +22,7 @@
         "ACTIONS": "Acciones",
         "ALL": "Todos",
         "CANCEL": "Cancelar",
+        "CHANGE_SORT": "Cambiar ordenamiento",
         "CHOOSE_AN_OPTION": "Seleccione una opción",
         "CONFIRM": "Confirmar",
         "CONFIRM_MESSAGE": "¿Está seguro que desea realizar la acción solicitada?",
