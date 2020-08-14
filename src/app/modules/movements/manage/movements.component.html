@@ -20,7 +20,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-icon-button (click)="changeSort()" [matTooltip]="'GENERAL.CHANGE_SORT' | translate">
+        <button mat-mini-fab color="primary" (click)="changeSort()" [matTooltip]="'GENERAL.CHANGE_SORT' | translate">
             <mat-icon>{{ isAscSort ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
         </button>
     </div>
