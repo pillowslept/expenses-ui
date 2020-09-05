@@ -1,4 +1,5 @@
 node_modules
 dist
 **/*.spec.ts
-src/typings.d.ts
+karma.conf.js
+e2e/protractor.conf.js

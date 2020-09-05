@@ -1,15 +1,25 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CategoriesService } from './categories.service';
 
 describe('CategoriesService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [CategoriesService]
-    });
-  });
 
-  it('should ...', inject([CategoriesService], (service: CategoriesService) => {
-    expect(service).toBeTruthy();
-  }));
+    let service: CategoriesService;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [CategoriesService]
+        });
+    });
+
+    beforeEach(() => {
+        service = TestBed.get(CategoriesService);
+    });
+
+    it('should create the component', () => {
+        expect(service).toBeTruthy();
+    });
+
 });
