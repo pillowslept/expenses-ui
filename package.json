@@ -4,6 +4,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "test:coverage": "ng test --no-watch --code-coverage",
     "lint": "eslint . --ext .ts",
@@ -34,7 +35,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1000.7",
+    "@angular-devkit/build-angular": "^0.1100.5",
     "@angular/cli": "^10.0.7",
     "@angular/compiler-cli": "^10.0.11",
     "@angular/language-service": "^10.0.11",
