@@ -18,7 +18,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <app-nav-bar (openMenu)="open()"></app-nav-bar>
+        <app-nav-bar [menuOptions]="MENU_OPTIONS" (openMenu)="open()"></app-nav-bar>
         <div class="router-container">
             <router-outlet></router-outlet>
         </div>

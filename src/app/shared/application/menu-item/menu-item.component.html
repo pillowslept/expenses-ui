@@ -1,5 +1,18 @@
-<mat-card fxLayout="row" fxLayoutAlign="start center" class="pointer" (click)="navigate()">
-    <mat-icon *ngIf="option?.icon">{{ option?.icon }}</mat-icon>
-    {{ option?.title | translate }}
+<mat-card fxLayout="row" fxLayoutAlign="space-between" class="pointer" (click)="triggerAction()">
+    <div fxFlex="80" fxLayoutAlign="start center">
+        <mat-icon *ngIf="option?.icon">{{ option?.icon }}</mat-icon>
+        {{ option?.title | translate }}
+    </div>
+    <mat-icon *ngIf="hasOptions">{{ isOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
 </mat-card>
 <mat-divider></mat-divider>
+<ng-container *ngIf="isOpen">
+    <ng-container *ngFor="let subOption of option?.options">
+        <mat-card fxLayout="row" fxLayoutAlign="start center" class="pointer" (click)="navigate(subOption)">
+            <div fxFlex="10"></div>
+            <mat-icon *ngIf="subOption?.icon">{{ subOption?.icon }}</mat-icon>
+            {{ subOption?.title | translate }}
+        </mat-card>
+        <mat-divider></mat-divider>
+    </ng-container>
+</ng-container>

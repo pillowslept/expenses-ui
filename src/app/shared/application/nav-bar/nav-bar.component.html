@@ -3,22 +3,24 @@
         <mat-icon>menu</mat-icon>
     </button>
     <span class="menu-spacer"></span>
-    <button mat-button routerLink="/movements">
-        {{ 'MOVEMENTS.TITLE' | translate }}
-    </button>
-    <button mat-button routerLink="/categories">
-        {{ 'CATEGORIES.TITLE' | translate }}
-    </button>
-    <button mat-button routerLink="/types">
-        {{ 'TYPES.TITLE' | translate }}
-    </button>
-    <button mat-button [matMenuTriggerFor]="menu">
-        {{ 'REPORTS.TITLE' | translate }}
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/reports/month-year">{{ 'MOVEMENTS.TITLE' | translate }}</button>
-        <button mat-menu-item routerLink="/reports/category">{{ 'CATEGORIES.TITLE' | translate }}</button>
-        <button mat-menu-item routerLink="/reports/type">{{ 'TYPES.TITLE' | translate }}</button>
-    </mat-menu>
+    <ng-container *ngFor="let option of menuOptions">
+        <ng-container *ngIf="!option?.options?.length; else menuOption">
+            <button mat-button (click)="navigate(option)">
+                {{ option?.title | translate }}
+            </button>
+        </ng-container>
+        <ng-template #menuOption>
+            <button mat-button [matMenuTriggerFor]="menu">
+                {{ option?.title | translate }}
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <ng-container *ngFor="let subOption of option?.options">
+                    <button mat-menu-item (click)="navigate(subOption)">
+                        {{ subOption?.title | translate }}
+                    </button>
+                </ng-container>
+            </mat-menu>
+        </ng-template>
+    </ng-container>
 </mat-toolbar>
