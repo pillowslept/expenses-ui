@@ -29,9 +29,6 @@ import { CreateEditMovementDialogComponent } from './create-edit/create-edit-mov
         CategoriesService,
         TypesService,
         FiltersService,
-    ],
-    entryComponents: [
-        CreateEditMovementDialogComponent,
     ]
 })
 export class MovementsModule { }

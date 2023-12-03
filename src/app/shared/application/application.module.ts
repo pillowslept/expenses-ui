@@ -37,7 +37,6 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     ],
     providers: [
         NotificationService,
-    ],
-    entryComponents: [ConfirmActionDialogComponent]
+    ]
 })
 export class ApplicationModule { }

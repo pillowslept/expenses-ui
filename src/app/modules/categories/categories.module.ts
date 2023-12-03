@@ -25,9 +25,6 @@ import { DialogService } from 'app/services/dialog.service';
     providers: [
         CategoriesService,
         DialogService,
-    ],
-    entryComponents: [
-        CreateEditCategoryDialogComponent,
     ]
 })
 export class CategoriesModule { }
